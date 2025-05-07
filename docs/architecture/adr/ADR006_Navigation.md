@@ -25,18 +25,18 @@ Tim kami lebih memilih menggunakan go-router dikarenakan beberapa faktor, yaitu:
 ## Alternative
 Kami sempat mempertimbangkan penggunaan Navigator 1.0 dan Navigator 2.0, namun meskipun masing-masing memiliki kelebihan, ada beberapa kelemahan yang perlu dipertimbangkan:
 1. Kelebihan dan kelemahan Navigator 1.0: 
-- Kelebihan:
-    - Lebih mudah digunakan dan sudah biasa digunakan oleh anggota tim.
-- Kelemahan: 
-    - Sulit mengelola deep linking.
-    - Tidak Ada Dukungan untuk Declarative Navigation.
-    - Akan kompleks jika ingin mengembangkan aplikasi.
-- 2. Kelebihan dan kelemahan Navigator 2.0: 
-- Kelebihan:
-    - Fleksibilitas dan Kontrol Penuh
-- Kelemahan:
-    - Kompleksitas implementasi.
-    - Bisa memakan waktu dan membingungkan.
+    - Kelebihan:
+        - Lebih mudah digunakan dan sudah biasa digunakan oleh anggota tim.
+    - Kelemahan: 
+        - Sulit mengelola deep linking.
+        - Tidak Ada Dukungan untuk Declarative Navigation.
+        - Akan kompleks jika ingin mengembangkan aplikasi.
+2. Kelebihan dan kelemahan Navigator 2.0: 
+    - Kelebihan:
+        - Fleksibilitas dan Kontrol Penuh
+    - Kelemahan:
+        - Kompleksitas implementasi.
+        - Bisa memakan waktu dan membingungkan.
 
 ## Consequences
 
