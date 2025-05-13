@@ -14,7 +14,7 @@ Team Lead @FranklinJaya2006
 
 ## Context
 
-### Dalam mengembangkan aplikasi Frontend dari **Jobaile**, kami perlu cara untuk melakukan navigasi untuk berpindah dan mengakses aplikasi. Oleh karena itu, kami perlu menentukan metode navigasi bagi aplikasi kami. Akan tetapi, karena keterbatasan tenaga kerja dan waktu yang tersisa, kami memerlukan sistem navigasi yang mudah untuk kami implementasikan.
+Dalam mengembangkan aplikasi Frontend dari **Jobaile**, kami perlu cara untuk melakukan navigasi untuk berpindah dan mengakses aplikasi. Oleh karena itu, kami perlu menentukan metode navigasi bagi aplikasi kami. Akan tetapi, karena keterbatasan tenaga kerja dan waktu yang tersisa, kami memerlukan sistem navigasi yang mudah untuk kami implementasikan.
 
 ## Decision
 Tim kami lebih memilih menggunakan go-router dikarenakan beberapa faktor, yaitu: 
