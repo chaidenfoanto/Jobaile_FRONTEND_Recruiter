@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:login/color/color.dart';
+import 'package:login/BLoC/loginbloc/login_bloc.dart';
+import 'package:login/BLoC/loginbloc/login_event.dart';
+import 'package:login/BLoC/loginbloc/login_state.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,11 +39,9 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Berhasil menekan login (belum terhubung ke API).'),
-      ),
-    );
+    
+
+    context.read<AuthBloc>().add(LoginSubmitted(email: email, password: password));
   }
 
   Widget _buildForm() {
@@ -46,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
     final panjanglayar = ukuranlayar.width;
     final lebarlayar = ukuranlayar.height;
     final bool isLandscape = lebarlayar > panjanglayar;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () => context.go('/lupa-password'),
             child: Text(
               'Lupa kata sandi?',
               style: TextStyle(fontSize: 12, fontFamily: 'Poppins'),
@@ -155,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 12, fontFamily: 'Poppins'),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () => context.go('/register'),
               child: Text(
                 'Daftar',
                 style: TextStyle(
@@ -177,54 +181,78 @@ class _LoginPageState extends State<LoginPage> {
     final ukuranlayar = MediaQuery.of(context).size;
     final pjgfoto = ukuranlayar.width;
     final lbrfoto = ukuranlayar.height;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          bool isLandscape = constraints.maxWidth > constraints.maxHeight;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(30),
-            child: isLandscape
-                ? Row(
-                    children: [
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: pjgfoto*0.35,
-                          maxHeight: lbrfoto*0.85,
-                        ),
-                        child: Image.asset(
-                          'assets/foto/AssetImage.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      SizedBox(width: 40),
-                      Expanded(child: _buildForm()),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      SizedBox(
-                        height: lbrfoto > 840 ? 12 : 5, // 740 hp kecil 914 hp besar
-                      ),
-                      Text(
-                        'Jobaile',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Image.asset(
-                        'assets/foto/AssetImage.png',
-                        height: lbrfoto > 840 ? lbrfoto * 0.40 : lbrfoto * 0.36, // 740 hp kecil 914 hp besar
-                        width: pjgfoto*0.65,
-                      ),
-                      _buildForm(),
-                    ],
-                  ),
+    return BlocListener<AuthBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginLoading) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => Center(child: CircularProgressIndicator()),
           );
-        },
+        } else {
+          Navigator.of(context, rootNavigator: true).pop(); // Tutup dialog loading
+          if (state is LoginSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Login berhasil!'),
+              backgroundColor: Colors.green,
+            ));
+            context.go('/home'); // Ganti dengan rute yang sesuai
+          } else if (state is LoginFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
+            ));
+          }
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            bool isLandscape = constraints.maxWidth > constraints.maxHeight;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(30),
+              child: isLandscape
+                  ? Row(
+                      children: [
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: pjgfoto * 0.35,
+                            maxHeight: lbrfoto * 0.85,
+                          ),
+                          child: Image.asset(
+                            'assets/foto/AssetImage.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        SizedBox(width: 40),
+                        Expanded(child: _buildForm()),
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        SizedBox(height: lbrfoto > 840 ? 12 : 5),
+                        Text(
+                          'Jobaile',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/foto/AssetImage.png',
+                          height: lbrfoto > 840 ? lbrfoto * 0.40 : lbrfoto * 0.36,
+                          width: pjgfoto * 0.65,
+                        ),
+                        _buildForm(),
+                      ],
+                    ),
+            );
+          },
+        ),
       ),
     );
   }
