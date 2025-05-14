@@ -20,10 +20,10 @@ Kami memutuskan menggunakan mekanisme offline first, offline first merupakan pen
 
 ## Alternatives
 Kami sempat memutuskan untuk mengggunakan Online First, karena memiliki beberapa keuntungan, tetapi terdapat beberapa kelemahan yang perlu kami pertimbangkan: 
-Kelebihan:
+### Kelebihan:
 - Tidak ada kekhawatiran tentang data yang sudah kadaluarsa atau tidak sinkron.
 - Pengguna tidak perlu khawatir mengenai penggunaan penyimpanan lokal yang berlebihan.
-Kelemahan:
+### Kelemahan:
 - Pengguna tidak dapat mengakses aplikasi atau data ketika tidak ada koneksi internet, yang mengurangi fleksibilitas penggunaan di daerah dengan jaringan yang buruk.
 - Boros kuota.
 
