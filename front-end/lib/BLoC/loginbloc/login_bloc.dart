@@ -2,7 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login/repository/auth_repository.dart';
 import 'login_event.dart';
-import 'login_state.dart';// Import AuthRepository di sini
+import 'login_state.dart';
 
 class AuthBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
@@ -18,16 +18,15 @@ class AuthBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoading());
 
     try {
-      // Gunakan authRepository untuk autentikasi
-      final bool success = await authRepository.authenticate(event.email, event.password);
-
+      final success = await authRepository.authenticate(event.email, event.password);
+      
       if (success) {
         emit(LoginSuccess());
       } else {
-        emit(LoginFailure(message: 'Email atau password salah.'));
+        emit(LoginFailure(message: 'Invalid credentials'));
       }
     } catch (e) {
-      emit(LoginFailure(message: 'Terjadi kesalahan: ${e.toString()}'));
+      emit(LoginFailure(message: e.toString()));
     }
   }
 }
