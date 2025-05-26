@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'splash_screen.dart';
+import 'splash_screen.dart';
 // import 'onboarding_screen.dart';
 import 'login.dart';
 // import 'register.dart';
@@ -15,27 +15,19 @@ class Jobaile extends StatefulWidget {
 }
 
 class _JobaileAppState extends State<Jobaile> {
-  late Future<String> _initialScreen;
+  // late Future<String> _initialScreen;
 
   // Future<String> _determineInitialScreen() async {
   //   final prefs = await SharedPreferences.getInstance();
 
-  //   // Cek apakah aplikasi pertama kali dibuka
   //   bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
-
   //   if (isFirstLaunch) {
   //     await prefs.setBool('isFirstLaunch', false);
-  //     return 'splash'; // Arahkan ke SplashScreen dulu
+  //     return 'splash';
   //   }
 
-  //   // Cek status login
   //   bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-
-  //   if (isLoggedIn) {
-  //     return 'dashboard';
-  //   } else {
-  //     return 'login';
-  //   }
+  //   return isLoggedIn ? 'dashboard' : 'login';
   // }
 
   // @override
@@ -50,8 +42,13 @@ class _JobaileAppState extends State<Jobaile> {
       debugShowCheckedModeBanner: false,
       title: 'Jobaile',
       theme: ThemeData(
-        primaryColor: const Color(0xFFFECE2E),
+        fontFamily: 'Poppins',
+        primaryColor: const Color(0xFF0C3C81), // Navy Blue
         scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xFF0C3C81),
+          secondary: const Color(0xFF93E0FF), // Light Blue
+        ),
         textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontFamily: 'Poppins',
@@ -66,32 +63,38 @@ class _JobaileAppState extends State<Jobaile> {
             color: Colors.black,
           ),
         ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF0C3C81),
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF0C3C81),
+            foregroundColor: Colors.white,
+            textStyle: const TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
       ),
-      home: FutureBuilder<String>(
-        future: _initialScreen,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            // return const SplashScreen(); // Sementara menunggu data, tampilkan splash
-          } else if (snapshot.hasData) {
-            switch (snapshot.data) {
-              case 'splash':
-                // return const SplashScreen();
-              case 'dashboard':
-                // return const DashboardScreen();
-              case 'login':
-              default:
-                return const LoginScreen();
-            }
-          } else {
-            return const LoginScreen(); // fallback jika snapshot error
-          }
-        },
-      ),
+      home: const SplashScreen(), // Sementara pakai login langsung
+      // Jika ingin pakai logika future, aktifkan kembali FutureBuilder dan initState
       routes: {
-        // '/onboarding': (context) => const OnboardingScreen(),
         '/login': (context) => const LoginScreen(),
         // '/register': (context) => const RegisterScreen(),
         // '/dashboard': (context) => const DashboardScreen(),
+        // '/onboarding': (context) => const OnboardingScreen(),
       },
     );
   }
