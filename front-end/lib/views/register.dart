@@ -306,7 +306,7 @@ class _RegisterPageState extends State<RegisterPage> {
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
-        validator: (value) => value!.isEmpty ? 'Field tidak boleh kosong' : null,
+        validator: (value) => value!.isEmpty ? 'Field tidak boleh kosong' : null, //Unit test
       ),
     );
   }
