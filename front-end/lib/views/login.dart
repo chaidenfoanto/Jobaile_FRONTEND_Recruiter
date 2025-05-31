@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/color/color.dart';
+import 'package:register/color/color.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
