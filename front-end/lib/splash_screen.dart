@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         setState(() {
           _currentPosition++;
         });
-      } else {
+      } else { 
         timer.cancel();
         Future.delayed(const Duration(milliseconds: 600), () {
           setState(() {
