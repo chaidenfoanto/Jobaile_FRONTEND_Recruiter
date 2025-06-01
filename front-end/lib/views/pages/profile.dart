@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size(393, 105), // Set ukuran W: 393, H: 105
+          preferredSize: Size(393, 105),
           child: AppBar(
             backgroundColor: Color(0xFF0B4C86),
             elevation: 0,
@@ -52,11 +52,11 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     SizedBox(height: 20),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(40), // Corner radius: 40
+                      borderRadius: BorderRadius.circular(40),
                       child: Image.network(
                         'https://i.ibb.co/SK5X5Nr/julia.jpg',
-                        width: 143, // Width: 143
-                        height: 143, // Height: 143
+                        width: 143,
+                        height: 143,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -133,20 +133,6 @@ class ProfilePage extends StatelessWidget {
               return Center(child: Text('Gagal memuat profil'));
             }
           },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Color(0xFF0B4C86),
-          unselectedItemColor: Colors.black45,
-          currentIndex: 3,
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
-          unselectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.connect_without_contact), label: "Match"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          ],
         ),
       ),
     );
