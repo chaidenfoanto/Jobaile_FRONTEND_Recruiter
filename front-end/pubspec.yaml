@@ -1,4 +1,4 @@
-name: login
+name: profile
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   objectbox: ^4.2.0
   objectbox_flutter_libs: any
+  flutter_bloc: ^9.1.1
+  go_router: ^15.1.2
+  http: ^1.4.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +66,15 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/foto/
+    - assets/foto/Chat.png
+    - assets/foto/Home.png
+    - assets/foto/Matching.png
+    - assets/foto/Profile.png
+    - assets/foto/Chat_active.png
+    - assets/foto/Home_active.png
+    - assets/foto/Matching_active.png
+    - assets/foto/Profile_active.png
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,0 +1,2 @@
+/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/CMakeFiles/rebuild_cache.dir
