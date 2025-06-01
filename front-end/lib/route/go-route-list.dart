@@ -1,15 +1,17 @@
 import 'package:go_router/go_router.dart';
+import 'package:register/views/dashboard.dart';
+import 'package:register/views/login.dart';
 // import 'package:login/views/Dashboard.dart';
 // import 'package:login/views/lupa.dart';
 import 'package:register/views/register.dart';
 
 final rutepage = GoRouter(
-  initialLocation: '/register',
+  initialLocation: '/login',
   routes: [
-    // GoRoute(
-    //   path: '/login',
-    //   builder: (context, state) => const LoginPage(),
-    // ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => const LoginPage(),
+    ),
     GoRoute(
       path: '/register',
       builder: (context, state) => RegisterPage(),
@@ -18,9 +20,9 @@ final rutepage = GoRouter(
     //   path: '/lupa-password',
     //   builder: (context, state) => const LupaPassword(),
     // ),
-    // GoRoute(
-    //   path: '/dashboard',
-    //   builder: (context, state) => const DashboardPage(),
-    // ),
+    GoRoute(
+      path: '/dashboard',
+      builder: (context, state) => const DashboardPage(),
+    ),
   ],
 );
