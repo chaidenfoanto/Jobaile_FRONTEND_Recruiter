@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/profile_bloc.dart';
-import '../blocs/profile_event.dart';
-import '../blocs/profile_state.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:profile/BLoC/profile_bloc.dart';
+import 'package:profile/BLoC/profile_event.dart';
+import 'package:profile/BLoC/profile_state.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -10,72 +11,158 @@ class ProfilePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ProfileBloc()..add(LoadProfile()),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Profil'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {
-                // TODO: Handle notification action
-              },
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size(393, 105), // Set ukuran W: 393, H: 105
+          child: AppBar(
+            backgroundColor: Color(0xFF0B4C86),
+            elevation: 0,
+            flexibleSpace: Container(
+              width: 393,
+              height: 105,
+              padding: EdgeInsets.only(top: 50, left: 16, right: 16),
+              alignment: Alignment.centerLeft,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Profil',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.notifications_none, color: Colors.white),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
         body: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileInitial) {
               return Center(child: CircularProgressIndicator());
             } else if (state is ProfileLoaded) {
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
+              return SingleChildScrollView(
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                      // Replace with your profile image URL or asset
-                      backgroundImage: NetworkImage('https://your-image-url.com'),
+                    SizedBox(height: 20),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40), // Corner radius: 40
+                      child: Image.network(
+                        'https://i.ibb.co/SK5X5Nr/julia.jpg',
+                        width: 143, // Width: 143
+                        height: 143, // Height: 143
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     SizedBox(height: 10),
                     Text(
                       state.user.name,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     SizedBox(height: 5),
                     Text(
                       state.user.phoneNumber,
-                      style: TextStyle(color: Colors.grey),
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
                     ),
-                    SizedBox(height: 20),
-                    Text('E-mail'),
-                    SizedBox(height: 5),
-                    Text(
-                      state.user.email,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(height: 20),
-                    ListTile(
-                      leading: Icon(Icons.bookmark),
-                      title: Text('Pekerja Favorit'),
-                      trailing: Icon(Icons.arrow_forward),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.assignment),
-                      title: Text('Terms & Conditions'),
-                      trailing: Icon(Icons.arrow_forward),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.contact_phone),
-                      title: Text('Contact us'),
-                      trailing: Icon(Icons.arrow_forward),
-                    ),
+                    SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "E-mail",
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(Icons.email_outlined, size: 24),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "E-mail address",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    state.user.email,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 30),
+                          Divider(),
+                          buildListItem(Icons.bookmark, "Pekerja Favorit"),
+                          Divider(),
+                          buildListItem(Icons.assignment, "Terms & Conditions"),
+                          Divider(),
+                          buildListItem(Icons.contact_phone, "Contact us"),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               );
+            } else {
+              return Center(child: Text('Gagal memuat profil'));
             }
-            return Center(child: Text('Error loading profile'));
           },
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: Color(0xFF0B4C86),
+          unselectedItemColor: Colors.black45,
+          currentIndex: 3,
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
+          unselectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(Icons.connect_without_contact), label: "Match"),
+            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget buildListItem(IconData icon, String title) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.black, size: 28),
+      title: Text(
+        title,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+        ),
+      ),
+      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {},
     );
   }
 }
