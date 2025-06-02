@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 import 'splash_screen.dart';
 // import 'onboarding_screen.dart';
@@ -50,16 +49,94 @@ class _JobaileAppState extends State<Jobaile> {
           secondary: const Color(0xFF93E0FF), // Light Blue
         ),
         textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 57,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          displayMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 45,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          displaySmall: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 36,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 32,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+          headlineSmall: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
           titleLarge: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),
+          titleMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            color: Colors.black,
+          ),
           bodyMedium: TextStyle(
             fontFamily: 'Poppins',
             fontSize: 14,
             fontWeight: FontWeight.normal,
+            color: Colors.black,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+            color: Colors.black,
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 11,
+            fontWeight: FontWeight.w400,
             color: Colors.black,
           ),
         ),

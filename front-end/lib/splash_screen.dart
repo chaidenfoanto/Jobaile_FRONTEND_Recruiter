@@ -1,4 +1,6 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
+// import 'package:login/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,12 +12,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _zigzagController;
-  late AnimationController _logoMoveLeftController;
-  late AnimationController _textController;
+  late AnimationController _splitController;
 
   late Animation<Alignment> _logoAlignmentZigzag;
-  late Animation<Alignment> _logoAlignmentToLeft;
-  late Animation<Offset> _textSlide;
+  late Animation<double> _logoSlideLeft;
+  late Animation<double> _textSlideRight;
   late Animation<double> _textFade;
 
   final List<Alignment> _zigzagPath = [
@@ -23,14 +24,18 @@ class _SplashScreenState extends State<SplashScreen>
     Alignment(0.6, -0.4),
     Alignment(-0.5, 0.0),
     Alignment(0.5, 0.3),
-    Alignment(0.0, 0.0), // akhir zigzag: tengah
+    Alignment.center, // akhir zigzag di tengah
   ];
+
+  late double screenWidth;
+  late double logoWidth;
+  late double fontSize;
+  late double slideOffset;
 
   @override
   void initState() {
     super.initState();
 
-    // Zigzag logo
     _zigzagController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 3),
@@ -48,59 +53,69 @@ class _SplashScreenState extends State<SplashScreen>
       }),
     ).animate(_zigzagController);
 
-    // Logo pindah ke kiri
-    _logoMoveLeftController = AnimationController(
+    _splitController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 1000),
     );
-
-    _logoAlignmentToLeft = AlignmentTween(
-      begin: const Alignment(0.0, 0.0),
-      end: const Alignment(-0.3, 0.0),
-    ).animate(CurvedAnimation(
-      parent: _logoMoveLeftController,
-      curve: Curves.easeOut,
-    ));
-
-    // Tulisan muncul dari belakang logo
-    _textController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 800),
-    );
-
-    _textSlide = Tween<Offset>(
-      begin: const Offset(0.0, 0.0),
-      end: const Offset(0.2, 0.0), // ke kanan
-    ).animate(CurvedAnimation(
-      parent: _textController,
-      curve: Curves.easeOut,
-    ));
 
     _textFade = Tween<double>(
       begin: 0.0,
       end: 1.0,
     ).animate(CurvedAnimation(
-      parent: _textController,
-      curve: Curves.easeOut,
+      parent: _splitController,
+      curve: Curves.easeIn,
     ));
 
-    _startAnimations();
+    _startAnimation();
   }
 
-  Future<void> _startAnimations() async {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    screenWidth = MediaQuery.of(context).size.width;
+
+    // Batasi ukuran agar tidak terlalu besar di tablet
+    logoWidth = min(screenWidth * 0.13, 80.0);
+    fontSize = min(screenWidth * 0.08, 40.0);
+    slideOffset = min(screenWidth * 0.2, 50.0);
+
+    _logoSlideLeft = Tween<double>(
+      begin: 0.0,
+      end: -slideOffset,
+    ).animate(CurvedAnimation(
+      parent: _splitController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    _textSlideRight = Tween<double>(
+      begin: 0.0,
+      end: slideOffset,
+    ).animate(CurvedAnimation(
+      parent: _splitController,
+      curve: Curves.easeOutCubic,
+    ));
+  }
+
+  Future<void> _startAnimation() async {
     await _zigzagController.forward(); // zigzag ke tengah
     await Future.delayed(const Duration(milliseconds: 300));
-    await Future.wait([
-      _logoMoveLeftController.forward(), // logo ke kiri
-      _textController.forward(), // text muncul
-    ]);
+    await _splitController.forward(); // logo kiri, teks kanan
+
+    // await Future.delayed(const Duration(seconds: 1));
+
+    // if (mounted) {
+    //   Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(builder: (_) => const LoginScreen()), // Ganti sesuai halaman tujuan kamu
+    //   );
+    // }
   }
 
   @override
   void dispose() {
     _zigzagController.dispose();
-    _logoMoveLeftController.dispose();
-    _textController.dispose();
+    _splitController.dispose();
     super.dispose();
   }
 
@@ -108,57 +123,46 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0C3C81),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Logo animasi gabungan (zigzag → tengah → kiri)
-          AnimatedBuilder(
-            animation: Listenable.merge(
-              [_zigzagController, _logoMoveLeftController],
-            ),
-            builder: (context, child) {
-              Alignment alignment = _zigzagController.isCompleted
-                  ? _logoAlignmentToLeft.value
-                  : _logoAlignmentZigzag.value;
+      body: AnimatedBuilder(
+        animation: Listenable.merge([_zigzagController, _splitController]),
+        builder: (context, child) {
+          final alignment = _zigzagController.isCompleted
+              ? Alignment.center
+              : _logoAlignmentZigzag.value;
 
-              return Align(
-                alignment: alignment,
-                child: Image.asset(
-                  'assets/images/logo-app.png',
-                  width: 80,
-                ),
-              );
-            },
-          ),
-
-          // Tulisan "Jobaile" muncul setelah logo ke tengah
-          AnimatedBuilder(
-            animation: _textController,
-            builder: (context, child) {
-              return Align(
-                alignment: const Alignment(0.0, 0.0), // posisi awal sejajar logo tengah
-                child: SlideTransition(
-                  position: _textSlide,
-                  child: FadeTransition(
-                    opacity: _textFade,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 80),
-                      child: Text(
-                        'Jobaile',
-                        style: const TextStyle(
-                          fontSize: 42,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontFamily: 'Poppins',
-                        ),
+          return Align(
+            alignment: alignment,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Teks muncul dari belakang logo
+                Opacity(
+                  opacity: _textFade.value,
+                  child: Transform.translate(
+                    offset: Offset(_textSlideRight.value, 0),
+                    child: Text(
+                      'Jobaile',
+                      style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontFamily: 'Poppins',
                       ),
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ],
+                // Logo geser ke kiri
+                Transform.translate(
+                  offset: Offset(_logoSlideLeft.value, 0),
+                  child: Image.asset(
+                    'assets/images/logo-app.png',
+                    width: logoWidth,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
