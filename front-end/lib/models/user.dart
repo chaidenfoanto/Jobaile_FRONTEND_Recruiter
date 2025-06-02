@@ -1,7 +1,9 @@
+// Models/user_model.dart
+
 class User {
   final String name;
-  final String email;
   final String phoneNumber;
+  final String email;
 
-  User({required this.name, required this.email, required this.phoneNumber});
+  User({required this.name, required this.phoneNumber, required this.email});
 }

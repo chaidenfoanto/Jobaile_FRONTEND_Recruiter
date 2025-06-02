@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../cubit/navigation_cubit.dart';
-import 'package:profile/views/pages/homepage.dart';
+import 'package:profile/views/pages/home.dart';
 import 'package:profile/views/pages/match.dart';
 import 'package:profile/views/pages/chat.dart';
 import 'package:profile/views/pages/profile.dart';

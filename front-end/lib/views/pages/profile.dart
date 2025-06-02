@@ -6,21 +6,26 @@ import 'package:profile/BLoC/profile_event.dart';
 import 'package:profile/BLoC/profile_state.dart';
 
 class ProfilePage extends StatelessWidget {
+  final VoidCallback? onNotificationPressed;
+
+  const ProfilePage({Key? key, this.onNotificationPressed}) : super(key: key);
+
   @override
+
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileBloc()..add(LoadProfile()),
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size(393, 105),
+          preferredSize: const Size(393, 105),
           child: AppBar(
-            backgroundColor: Color(0xFF0B4C86),
+            backgroundColor: const Color(0xFF0B4C86),
             elevation: 0,
             flexibleSpace: Container(
               width: 393,
               height: 105,
-              padding: EdgeInsets.only(top: 50, left: 16, right: 16),
+              padding: const EdgeInsets.only(top: 50, left: 16, right: 16),
               alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,8 +39,9 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.notifications_none, color: Colors.white),
-                    onPressed: () {},
+                    key: const Key('notification_button'),
+                    icon: const Icon(Icons.notifications_none, color: Colors.white),
+                    onPressed: onNotificationPressed ?? () {},
                   ),
                 ],
               ),
@@ -45,22 +51,22 @@ class ProfilePage extends StatelessWidget {
         body: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileInitial) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is ProfileLoaded) {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(40),
-                      child: Image.network(
-                        'https://i.ibb.co/SK5X5Nr/julia.jpg',
+                      child: Image.asset(
+                        'assets/foto/foto.png',
                         width: 143,
                         height: 143,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       state.user.name,
                       style: GoogleFonts.poppins(
@@ -68,7 +74,7 @@ class ProfilePage extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       state.user.phoneNumber,
                       style: GoogleFonts.poppins(
@@ -76,7 +82,7 @@ class ProfilePage extends StatelessWidget {
                         color: Colors.grey,
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
@@ -89,39 +95,39 @@ class ProfilePage extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Icon(Icons.email_outlined, size: 24),
-                              SizedBox(width: 10),
+                              const Icon(Icons.email_outlined, size: 24),
+                              const SizedBox(width: 10),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     "E-mail address",
                                     style: GoogleFonts.poppins(
-                                      fontSize: 12,
+                                      fontSize: 14,
                                       color: Colors.grey,
                                     ),
                                   ),
-                                  SizedBox(height: 2),
+                                  const SizedBox(height: 2),
                                   Text(
                                     state.user.email,
                                     style: GoogleFonts.poppins(
-                                      fontSize: 12,
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          SizedBox(height: 30),
-                          Divider(),
+                          const SizedBox(height: 30),
+                          const Divider(),
                           buildListItem(Icons.bookmark, "Pekerja Favorit"),
-                          Divider(),
+                          const Divider(),
                           buildListItem(Icons.assignment, "Terms & Conditions"),
-                          Divider(),
+                          const Divider(),
                           buildListItem(Icons.contact_phone, "Contact us"),
                         ],
                       ),
@@ -130,7 +136,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(child: Text('Gagal memuat profil'));
+              return const Center(child: Text('Gagal memuat profil'));
             }
           },
         ),
@@ -147,7 +153,7 @@ class ProfilePage extends StatelessWidget {
           fontSize: 16,
         ),
       ),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {},
     );
   }
