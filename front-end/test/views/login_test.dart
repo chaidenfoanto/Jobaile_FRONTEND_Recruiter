@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:register/views/login.dart';
 import 'package:register/BLoC/loginbloc/login_bloc.dart';
 import 'package:register/urlapi/loginapi.dart';
+import 'package:register/views/register.dart';
 
 class FakeAuthRepository extends AuthRepository {
   @override
@@ -55,8 +57,14 @@ void main() {
 
     final button = find.text('Sign In');
     expect(button, findsOneWidget);
-    
+
+    final button2 = find.text('Daftar');
+    expect(button2, findsOneWidget);
+
+    final button3 = find.text('Lupa kata sandi?');
+    expect(button3, findsOneWidget);
   });
+  
 
   testWidgets('Email should have @ symbol', (tester) async {
     final authBloc = AuthBloc(authRepository: FakeAuthRepository());
@@ -86,5 +94,44 @@ void main() {
 
     // Cek apakah email valid
     expect(emailText.controller?.text.contains('@'), isTrue);
+  });
+
+  testWidgets('Tombol Daftar navigasi ke halaman register', (WidgetTester tester) async {
+    final router = GoRouter(
+      initialLocation: '/',
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => Scaffold(
+            body: Center(
+              child: TextButton(
+                key: Key('daftarButton'),
+                onPressed: () => context.go('/register'),
+                child: Text('Daftar'),
+              ),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/register',
+          builder: (context, state) => RegisterPage(), // Pakai halaman asli kamu
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(MaterialApp.router(
+      routerConfig: router,
+    ));
+
+    final daftar = find.widgetWithText(TextButton, 'Daftar');
+    // Pastikan tombol tampil
+    await tester.tap(daftar);
+    // Tap tombol
+
+    final texthalamanregist = find.text('Registrasi');
+    await tester.pumpAndSettle();
+
+    // Cek apakah halaman register muncul, misalnya berdasarkan teks atau widget unik
+    expect(texthalamanregist, findsOneWidget); // Ganti dengan konten khas RegisterPage
   });
 }
