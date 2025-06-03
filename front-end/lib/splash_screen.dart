@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-// import 'package:login/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login.dart';
+import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -102,15 +105,43 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 300));
     await _splitController.forward(); // logo kiri, teks kanan
 
-    // await Future.delayed(const Duration(seconds: 1));
+    final prefs = await SharedPreferences.getInstance();
+    bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
 
-    // if (mounted) {
-    //   Navigator.pushReplacement(
-    //     context,
-    //     MaterialPageRoute(builder: (_) => const LoginScreen()), // Ganti sesuai halaman tujuan kamu
-    //   );
-    // }
+    await Future.delayed(const Duration(seconds: 1));
+
+    if (isFirstLaunch) {
+      prefs.setBool('isFirstLaunch', false);
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const OnboardingScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.easeOut;
+
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            var offsetAnimation = animation.drive(tween);
+
+            return SlideTransition(
+              position: offsetAnimation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(seconds: 1),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    }
   }
+
 
   @override
   void dispose() {
