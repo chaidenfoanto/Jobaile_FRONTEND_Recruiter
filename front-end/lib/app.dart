@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'splash_screen.dart';
-// import 'onboarding_screen.dart';
+import 'onboarding_screen.dart';
 import 'login.dart';
 // import 'register.dart';
 // import 'dashboard_screen.dart';
@@ -169,9 +169,9 @@ class _JobaileAppState extends State<Jobaile> {
       // Jika ingin pakai logika future, aktifkan kembali FutureBuilder dan initState
       routes: {
         '/login': (context) => const LoginScreen(),
+        '/onboarding': (context) => const OnboardingScreen(),
         // '/register': (context) => const RegisterScreen(),
         // '/dashboard': (context) => const DashboardScreen(),
-        // '/onboarding': (context) => const OnboardingScreen(),
       },
     );
   }
