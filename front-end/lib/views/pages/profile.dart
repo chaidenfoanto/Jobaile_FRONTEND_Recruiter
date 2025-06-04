@@ -7,11 +7,36 @@ import 'package:profile/BLoC/profile_state.dart';
 
 class ProfilePage extends StatelessWidget {
   final VoidCallback? onNotificationPressed;
+  // Tambahkan parameter onListItemTap di sini
+  final Function(String)? onListItemTap;
 
-  const ProfilePage({Key? key, this.onNotificationPressed}) : super(key: key);
+  const ProfilePage({Key? key, this.onNotificationPressed, this.onListItemTap}) : super(key: key);
+
+  // Fungsi pembantu untuk membangun item daftar.
+  // Sekarang menerima VoidCallback untuk properti onTap.
+  Widget _buildListItem(BuildContext context, IconData icon, String title, String routeName) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.black, size: 28),
+      title: Text(
+        title,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+        ),
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      onTap: () {
+        // Jika onListItemTap disediakan (biasanya di tes), gunakan itu.
+        // Jika tidak, lakukan navigasi sebenarnya.
+        if (onListItemTap != null) {
+          onListItemTap!(routeName);
+        } else {
+          Navigator.pushNamed(context, routeName);
+        }
+      },
+    );
+  }
 
   @override
-
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProfileBloc()..add(LoadProfile()),
@@ -124,11 +149,12 @@ class ProfilePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 30),
                           const Divider(),
-                          buildListItem(Icons.bookmark, "Pekerja Favorit"),
+                          // Panggil _buildListItem dengan rute yang sesuai
+                          _buildListItem(context, Icons.bookmark, "Pekerja Favorit", '/favorite_workers'),
                           const Divider(),
-                          buildListItem(Icons.assignment, "Terms & Conditions"),
+                          _buildListItem(context, Icons.assignment, "Terms & Conditions", '/terms_conditions'),
                           const Divider(),
-                          buildListItem(Icons.contact_phone, "Contact us"),
+                          _buildListItem(context, Icons.contact_phone, "Contact us", '/contact_us'),
                         ],
                       ),
                     )
@@ -141,20 +167,6 @@ class ProfilePage extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  Widget buildListItem(IconData icon, String title) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.black, size: 28),
-      title: Text(
-        title,
-        style: GoogleFonts.poppins(
-          fontSize: 16,
-        ),
-      ),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      onTap: () {},
     );
   }
 }
