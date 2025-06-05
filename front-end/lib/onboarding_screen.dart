@@ -64,27 +64,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               },
               children: [
                 const _OnboardingItem(
-                  image: 'assets/animations/tracking.json',
-                  title: 'Tracking Realtime',
+                  image: 'assets/animations/housemaid.json',
+                  title: 'Pencarian Lebih Mudah',
                   description:
-                      'Craftsman will know where you are automatically',
+                      'Temukan tenaga kerja rumah tangga yang tepat dan terpercaya tanpa ribet. Cukup melalui Jobaile, semua kebutuhan rumah tangga Anda bisa langsung terbantu.',
                 ),
                 const _OnboardingItem(
-                  image: 'assets/animations/order-anywhere.json',
-                  title: 'Order from anywhere',
+                  image: 'assets/animations/contract.json',
+                  title: 'Aman dan Terjangkau',
                   description:
-                      'Suggests flexibility and convenience, allowing users to make purchases or book services seamlessly',
+                      'Sistem kontrak digital menjamin kinerja ART, didukung oleh rating dan ulasan dari pengguna lain. Aman, transparan, dan terpercaya.',
                 ),
                 _OnboardingItem(
-                  image: 'assets/animations/enable-location.json',
-                  title: 'Enable Your Location',
+                  image: 'assets/animations/location.json',
+                  title: 'Dekat dan Siap Kerja',
                   description:
-                      'Choose your location to start finding the request around you',
-                  buttonLabel: 'USE MY LOCATION',
+                      'Aktifkan lokasi dan temukan ART terdekat yang siap membantu.  Prosesnya cepat, praktis, dan langsung cocok dengan kebutuhanmu.',
+                  buttonLabel: 'NYALAKAN LOKASI',
                   extraButton: GestureDetector(
                     onTap: _navigateToLogin,
                     child: Text(
-                      'Skip For Now',
+                      'Lewati untuk Sekarang',
                       style: GoogleFonts.poppins(
                         fontSize: isSmallScreen ? 13 : 15,
                         fontWeight: FontWeight.w500,
