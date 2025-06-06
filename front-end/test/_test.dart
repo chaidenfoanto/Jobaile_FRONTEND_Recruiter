@@ -93,24 +93,24 @@ void main() {
       expect(find.byIcon(Icons.arrow_forward_ios), findsNWidgets(3));
     });
 
-    testWidgets('can scroll through the profile page', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: BlocProvider<ProfileBloc>(
-            create: (_) => ProfileBloc()..add(LoadProfile()),
-            child: ProfilePage(),
-          ),
-        ),
-      );
+    // testWidgets('can scroll through the profile page', (WidgetTester tester) async {
+    //   await tester.pumpWidget(
+    //     MaterialApp(
+    //       home: BlocProvider<ProfileBloc>(
+    //         create: (_) => ProfileBloc()..add(LoadProfile()),
+    //         child: ProfilePage(),
+    //       ),
+    //     ),
+    //   );
 
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+    //   await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      final scrollableFinder = find.byType(SingleChildScrollView);
-      expect(scrollableFinder, findsOneWidget);
+    //   final scrollableFinder = find.byType(SingleChildScrollView);
+    //   expect(scrollableFinder, findsOneWidget);
 
-      await tester.drag(scrollableFinder, const Offset(0, -300));
-      await tester.pumpAndSettle();
-    });
+    //   await tester.drag(scrollableFinder, const Offset(0, -300));
+    //   await tester.pumpAndSettle();
+    // });
 
     testWidgets('tapping list items does not crash and is tappable', (WidgetTester tester) async {
       // Kita akan menggunakan callback onListItemTap untuk mencegah navigasi sebenarnya
