@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // ⬅️ Tambahkan ini
+import 'package:login/login.dart';
 
 import 'views/splash/splash_screen.dart';
 import 'views/onboarding/onboarding_screen.dart';
-import 'login.dart';
+import 'views/login.dart';
 // import 'register.dart';
 // import 'dashboard_screen.dart';
 
