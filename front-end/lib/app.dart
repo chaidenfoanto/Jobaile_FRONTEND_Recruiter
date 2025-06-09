@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'BLoC/splash/splash_bloc.dart';
-import 'package:login/BLoC/login/login_bloc.dart';
-
-import 'package:login/services/loginapi.dart';
+import 'BLoC/login/login_bloc.dart';
+import 'services/loginapi.dart';
+import 'cubit/navigation_cubit.dart';
 import 'repository/splash_repository.dart'; 
-
 import 'route/app_router.dart';
 
 class Jobaile extends StatefulWidget {
@@ -27,7 +26,9 @@ class _JobaileAppState extends State<Jobaile> {
       BlocProvider<AuthBloc>( 
         create: (context) => AuthBloc(authRepository: AuthRepository()),
       ),
-        // Tambahkan bloc lainnya di sini jika ada
+      BlocProvider<NavigationCubit>(
+        create: (context) => NavigationCubit(),
+      ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

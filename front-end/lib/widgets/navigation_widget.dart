@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../cubit/navigation_cubit.dart';
-import 'package:navigation/views/pages/homepage.dart';
-import 'package:navigation/views/pages/match.dart';
-import 'package:navigation/views/pages/chat.dart';
-import 'package:navigation/views/pages/profile.dart';
-import 'package:navigation/color/color.dart';
+
+import '/color/color.dart';
+import '/cubit/navigation_cubit.dart';
+import '/views/dashboard.dart';
+import '/views/matchmaking.dart';
+import '/views/chat.dart';
+import '/views/profile.dart';
 
 class NavigationWidget extends StatelessWidget {
   final Map<NavigationItem, Widget> pages = {
-    NavigationItem.home: HomePage(),
-    NavigationItem.match: MatchPage(),
-    NavigationItem.chat: ChatPage(),
-    NavigationItem.profile: ProfilePage(),
+    NavigationItem.home: DashboardScreen(),
+    NavigationItem.match: MatchmakingScreen(),
+    NavigationItem.chat: ChatScreen(),
+    NavigationItem.profile: ProfileScreen(),
   };
 
   @override
@@ -47,23 +48,23 @@ class NavigationWidget extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             items: const [
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/foto/Home.png')),
-                activeIcon: ImageIcon(AssetImage('assets/foto/Home_active.png')),
+                icon: ImageIcon(AssetImage('assets/icons/home.svg')),
+                activeIcon: ImageIcon(AssetImage('assets/icons/home_active.svg')),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/foto/Matching.png')),
-                activeIcon: ImageIcon(AssetImage('assets/foto/Matching_active.png')),
+                icon: ImageIcon(AssetImage('assets/icons/matching.svg')),
+                activeIcon: ImageIcon(AssetImage('assets/icons/matching_active.svg')),
                 label: 'Match',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/foto/Chat.png')),
-                activeIcon: ImageIcon(AssetImage('assets/foto/Chat_active.png')),
+                icon: ImageIcon(AssetImage('assets/icons/chat.svg')),
+                activeIcon: ImageIcon(AssetImage('assets/icons/chat_active.svg')),
                 label: 'Chat',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/foto/Profile.png')),
-                activeIcon: ImageIcon(AssetImage('assets/foto/Profile_active.png')),
+                icon: ImageIcon(AssetImage('assets/icons/profile.svg')),
+                activeIcon: ImageIcon(AssetImage('assets/icons/profile_active.svg')),
                 label: 'Profile',
               ),
             ],
