@@ -8,7 +8,7 @@ import 'package:navigation/views/pages/chat.dart';
 import 'package:navigation/views/pages/profile.dart';
 import 'package:navigation/color/color.dart';
 
-class NavigationScreen extends StatelessWidget {
+class NavigationWidget extends StatelessWidget {
   final Map<NavigationItem, Widget> pages = {
     NavigationItem.home: HomePage(),
     NavigationItem.match: MatchPage(),

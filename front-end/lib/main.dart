@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: BlocProvider(
         create: (_) => NavigationCubit(),
-        child: NavigationScreen(),
+        child: NavigationWidget(),
       ),
     );
   }
