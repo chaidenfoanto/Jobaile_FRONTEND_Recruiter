@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'package:register/views/dashboard.dart';
-import 'package:register/views/login.dart';
-// import 'package:login/views/Dashboard.dart';
+import 'package:login/views/dashboard.dart';
+import '/views/login.dart';
+import '/views/register.dart';
+// import 'views/dashboard.dart';
 // import 'package:login/views/lupa.dart';
-import 'package:register/views/register.dart';
+
 
 final rutepage = GoRouter(
   initialLocation: '/login',

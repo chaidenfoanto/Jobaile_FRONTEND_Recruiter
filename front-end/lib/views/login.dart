@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:register/BLoC/loginbloc/login_bloc.dart';
-import 'package:register/BLoC/loginbloc/login_event.dart';
-import 'package:register/BLoC/loginbloc/login_state.dart';
-import 'package:register/color/color.dart';
+import '/BLoC/login/login_bloc.dart';
+import '/BLoC/login/login_event.dart';
+import '/BLoC/login/login_state.dart';
+import '/color/color.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

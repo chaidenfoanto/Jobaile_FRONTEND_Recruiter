@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-import 'package:register/BLoC/register_bloc.dart';
-import 'package:register/BLoC/register_event.dart';
-import 'package:register/BLoC/register_state.dart';
+import '/BLoC/register_bloc.dart';
+import '/BLoC/register_event.dart';
+import '/BLoC/register_state.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
