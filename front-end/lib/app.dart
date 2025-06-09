@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; // ⬅️ Tambahkan ini
-import 'package:login/login.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'views/splash/splash_screen.dart';
-import 'views/onboarding/onboarding_screen.dart';
-import 'views/login.dart';
-// import 'register.dart';
-// import 'dashboard_screen.dart';
+import 'BLoC/splash/splash_bloc.dart';
+import 'package:login/BLoC/login/login_bloc.dart';
 
-import 'BLoC/splash/splash_bloc.dart'; // ⬅️ Import SplashBloc kamu
-import 'repository/splash_repository.dart'; // ⬅️ Import repository
+import 'package:login/services/loginapi.dart';
+import 'repository/splash_repository.dart'; 
 
+import 'route/app_router.dart';
 
 class Jobaile extends StatefulWidget {
   const Jobaile({super.key});
@@ -27,9 +24,12 @@ class _JobaileAppState extends State<Jobaile> {
        BlocProvider<SplashBloc>(
         create: (context) => SplashBloc(repository: SplashRepository()),
       ),
+      BlocProvider<AuthBloc>( 
+        create: (context) => AuthBloc(authRepository: AuthRepository()),
+      ),
         // Tambahkan bloc lainnya di sini jika ada
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Jobaile',
         theme: ThemeData(
@@ -73,13 +73,7 @@ class _JobaileAppState extends State<Jobaile> {
             ),
           ),
         ),
-        home: const SplashScreen(),
-        routes: {
-          '/login': (context) => const LoginScreen(),
-          '/onboarding': (context) => const OnboardingScreen(),
-          // '/register': (context) => const RegisterScreen(),
-          // '/dashboard': (context) => const DashboardScreen(),
-        },
+        routerConfig: appRouter,
       ),
     );
   }

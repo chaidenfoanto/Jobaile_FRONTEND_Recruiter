@@ -17,6 +17,7 @@ class AuthRepository {
       );
 
       if (response.statusCode == 200) {
+        // ignore: unused_local_variable -- responseData
         final responseData = jsonDecode(response.body);
         // Store the token if needed
         // await storage.write(key: 'token', value: responseData['access_token']);

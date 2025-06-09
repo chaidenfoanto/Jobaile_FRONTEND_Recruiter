@@ -6,14 +6,14 @@ import '/BLoC/login/login_event.dart';
 import '/BLoC/login/login_state.dart';
 import '/color/color.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -39,6 +39,18 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    // Dummy login manual
+    if (email == 'user@example.com' && password == 'user123') {
+      // Tampilkan snackBar sukses dummy login
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Login dummy berhasil!'),
+        backgroundColor: Colors.green,
+      ));
+
+      // Navigasi langsung ke dashboard
+      context.go('/dashboard');
+      return; // agar tidak lanjut ke BLoC
+    }
     
 
     context.read<AuthBloc>().add(LoginSubmitted(email: email, password: password));
@@ -48,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
     final ukuranlayar = MediaQuery.of(context).size;
     final panjanglayar = ukuranlayar.width;
     final lebarlayar = ukuranlayar.height;
+    // ignore: unused_local_variable -- isLandscape
     final bool isLandscape = lebarlayar > panjanglayar;
 
     return Column(
@@ -161,7 +174,9 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(fontSize: 12, fontFamily: 'Poppins'),
             ),
             TextButton(
-              onPressed: () => context.go('/register'),
+              onPressed: () {
+                context.go('/register');
+              },
               child: Text(
                 'Daftar',
                 style: TextStyle(

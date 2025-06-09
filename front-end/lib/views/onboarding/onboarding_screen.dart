@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '/BLoC/onboarding/onboarding_bloc.dart';
 import '/BLoC/onboarding/onboarding_event.dart';
 import '/BLoC/onboarding/onboarding_state.dart';
 import '/widgets/onboarding_item.dart';
-import '/login.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -18,10 +18,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
 
   void _goToLogin() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
-    );
+    context.push('/login');
   }
 
   @override
@@ -79,9 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           context.read<OnboardingBloc>().add(
                             EnableLocationPressed(
                               onSuccessNavigate: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                                );
+                                context.go('/login');
                               },
                             ),
                           );

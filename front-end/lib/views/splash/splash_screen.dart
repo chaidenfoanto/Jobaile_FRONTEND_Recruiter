@@ -1,12 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:login/BLoC/splash/splash_bloc.dart';
 import 'package:login/BLoC/splash/splash_event.dart';
 import 'package:login/BLoC/splash/splash_state.dart';
-import 'package:login/views/onboarding/onboarding_screen.dart';
 // import 'onboarding_screen.dart';
-import '/login.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -113,25 +113,9 @@ class _SplashScreenState extends State<SplashScreen>
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashToOnboarding) {
-          Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation, secondaryAnimation) => const OnboardingScreen(),
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                const begin = Offset(0.0, 1.0);
-                const end = Offset.zero;
-                const curve = Curves.easeOut;
-                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-                return SlideTransition(position: animation.drive(tween), child: child);
-              },
-              transitionDuration: const Duration(seconds: 1),
-            ),
-          );
+          context.go('/onboarding', extra: 'fromSplash');
         } else if (state is SplashToLogin) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-          );
+          context.go('/login', extra: 'fromSplash');
         }
       },
       child: Scaffold(

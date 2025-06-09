@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:login/color/color.dart';
 
-import '/BLoC/register_bloc.dart';
-import '/BLoC/register_event.dart';
-import '/BLoC/register_state.dart';
+import '../BLoC/register/register_bloc.dart';
+import '../BLoC/register/register_event.dart';
+import '../BLoC/register/register_state.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -230,17 +232,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             'Sudah memiliki akun? ',
                             style: GoogleFonts.poppins(fontSize: 12),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigasi ke halaman login, misalnya:
-                              // context.go('/login');
+                          TextButton(
+                            onPressed: () {
+                              context.go('/login');
                             },
                             child: Text(
                               'Masuk',
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
-                                color: const Color(0xFF1D3671),
+                                color: AppColors.primary,
                               ),
                             ),
                           ),

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:register/views/login.dart';
-import 'package:register/BLoC/loginbloc/login_bloc.dart';
-import 'package:register/urlapi/loginapi.dart';
-import 'package:register/views/register.dart';
+import 'package:login/BLoC/login/login_bloc.dart';
+import 'package:login/services/loginapi.dart';
+import 'package:login/views/login.dart';
+import 'package:login/views/register.dart';
+
 
 class FakeAuthRepository extends AuthRepository {
   @override
@@ -22,7 +23,7 @@ void main() {
     MaterialApp(
       home: BlocProvider<AuthBloc>.value(
         value: authBloc,
-        child: const LoginPage(),
+        child: const LoginScreen(),
       ),
     ),
   );
@@ -50,7 +51,7 @@ void main() {
     MaterialApp(
       home: BlocProvider<AuthBloc>.value(
         value: authBloc,
-        child: const LoginPage(),
+        child: const LoginScreen(),
       ),
     ),
   );
@@ -73,7 +74,7 @@ void main() {
     MaterialApp(
       home: BlocProvider<AuthBloc>.value(
         value: authBloc,
-        child: const LoginPage(),
+        child: const LoginScreen(),
       ),
     ),
   );
@@ -114,7 +115,7 @@ void main() {
         ),
         GoRoute(
           path: '/register',
-          builder: (context, state) => RegisterPage(), // Pakai halaman asli kamu
+          builder: (context, state) => RegisterScreen(), // Pakai halaman asli kamu
         ),
       ],
     );
