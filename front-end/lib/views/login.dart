@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                             maxHeight: lbrfoto * 0.85,
                           ),
                           child: Image.asset(
-                            'assets/foto/AssetImage.png',
+                            'assets/images/logoApp-Icon.png',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Image.asset(
-                          'assets/foto/AssetImage.png',
+                          'assets/images/logoApp-Icon.png',
                           height: lbrfoto > 840 ? lbrfoto * 0.40 : lbrfoto * 0.36,
                           width: pjgfoto * 0.65,
                         ),
