@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'cubit/navigation_cubit.dart';
-import 'views/navigation.dart';
+import 'package:detail_profil/repository/detail_repository.dart';
+import 'package:detail_profil/BLoC/detail_bloc.dart';
+import 'package:detail_profil/views/pages/detail_worker.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Job Finder App',
+      title: 'Worker Detail App',
       theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(),
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: BlocProvider(
-        create: (_) => NavigationCubit(),
-        child: MainScreen(),
+        create: (context) => WorkerDetailBloc(
+          workerRepository: ProfileRepository(),
+        )..add(const LoadWorkerDetail('wViHhN3kKOVLboYhimfG')), // Ganti dengan ID worker valid dari database Anda
+        child: const WorkerDetailPage(workerId: 'wViHhN3kKOVLboYhimfG'), // Ganti dengan ID worker valid dari database Anda
       ),
     );
   }
