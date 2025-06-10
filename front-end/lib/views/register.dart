@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; // Perbaiki import: 'package:flutter_bloc/flutter_bloc.dart'
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'dart:ui'; // Tambahkan import ini untuk PathMetrics
 
 import 'package:register/BLoC/register_bloc.dart';
 import 'package:register/BLoC/register_event.dart';
@@ -22,7 +23,22 @@ class _RegisterPageState extends State<RegisterPage> {
   PhoneNumber number = PhoneNumber(isoCode: 'ID');
   String? selectedGender;
   DateTime? _selectedDate;
-  String? _idPhotoPath = 'path/to/photo.jpg'; // Simulasi foto KTP
+  String? _idPhotoPath; // Simulasi foto KTP - diubah menjadi nullable
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  // Method untuk menampilkan snackbar
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,214 +59,267 @@ class _RegisterPageState extends State<RegisterPage> {
             }
 
             if (state is RegisterSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Registrasi berhasil!')),
-              );
+              _showSnackBar('Registrasi berhasil!');
             }
 
             if (state is RegisterFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              _showSnackBar(state.message);
             }
           },
           child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 24),
-                      const Icon(Icons.arrow_back, size: 28),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Center(
-                          child: Text(
-                            'Get Started',
-                            style: GoogleFonts.poppins(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
+            child: Stack( // Menggunakan Stack untuk positioning absolut
+              children: [
+                // Icon Arrow Back (posisi tetap di kiri atas)
+                Positioned(
+                  top: 24, // Padding dari atas
+                  left: 24, // Padding dari kiri
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(); // Contoh: kembali ke halaman sebelumnya
+                    },
+                    child: Image.asset(
+                      'assets/foto/backbutton.png', // Ganti dengan path aset Anda
+                      width: 28, // Sesuaikan ukuran sesuai kebutuhan
+                      height: 28, // Sesuaikan ukuran sesuai kebutuhan
+                    ),
+                  ),
+                ),
+
+                // Teks "Get Started" (posisi di tengah secara horizontal)
+                Positioned(
+                  top: 24 + 28 + 16, // Penyesuaian posisi agar tidak bertabrakan dengan ikon panah
+                  left: 0,
+                  right: 0,
+                  child: Center( // Center widget untuk menengahkan teks secara horizontal
+                    child: Text(
+                      'Get Started',
+                      style: GoogleFonts.poppins(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Registrasi',
-                        style: GoogleFonts.poppins(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        'Silahkan registrasi untuk login',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(height: 30),
+                    ),
+                  ),
+                ),
 
-                      const SizedBox(height: 16),
-                      buildLabel('Nama Lengkap'),
-                      const SizedBox(height: 8),
-                      buildInputField('Enter your full name', _fullNameController),
-
-                      const SizedBox(height: 16),
-                      buildLabel('E-mail'),
-                      const SizedBox(height: 8),
-                      buildInputField('Enter your email', _emailController),
-
-                      const SizedBox(height: 16),
-                      buildLabel('Kata Sandi'),
-                      const SizedBox(height: 8),
-                      buildIconInputField('Password', Icons.lock, _passwordController, obscure: true),
-
-                      const SizedBox(height: 16),
-                      buildLabel('Nomor Telepon'),
-                      const SizedBox(height: 8),
-                      InternationalPhoneNumberInput(
-                        onInputChanged: (PhoneNumber number) {
-                          this.number = number;
-                        },
-                        selectorConfig: const SelectorConfig(
-                          selectorType: PhoneInputSelectorType.DROPDOWN,
-                        ),
-                        initialValue: number,
-                        textStyle: GoogleFonts.inter(fontSize: 12),
-                        inputDecoration: InputDecoration(
-                          hintText: 'Phone Number',
-                          filled: true,
-                          fillColor: Colors.grey.shade300,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                        ),
-                      ),
-
-                      const SizedBox(height: 16),
-                      buildLabel('Jenis Kelamin'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          buildGenderOption('Laki - laki'),
-                          const SizedBox(width: 20),
-                          buildGenderOption('Perempuan'),
-                        ],
-                      ),
-
-                      const SizedBox(height: 16),
-                      BirthDateSelector(onDateSelected: (date) {
-                        _selectedDate = date;
-                      }),
-
-                      const SizedBox(height: 16),
-                      buildLabel('Kartu Tanda Pengenal'),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.black, width: 1),
-                        ),
-                        child: CustomPaint(
-                          painter: DashedBorderPainter(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.add, size: 20),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Masukkan Foto KTP',
-                                  style: GoogleFonts.inter(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 34),
-                      Center(
-                        child: SizedBox(
-                          width: 210,
-                          height: 40,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate() &&
-                                  _selectedDate != null &&
-                                  _idPhotoPath != null &&
-                                  selectedGender != null) {
-                                context.read<RegisterBloc>().add(RegisterSubmitted(
-                                      fullName: _fullNameController.text,
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                      phoneNumber: number.phoneNumber ?? '',
-                                      gender: selectedGender!,
-                                      birthDate: _selectedDate!.toIso8601String().split('T')[0],
-                                      idPhotoPath: _idPhotoPath!,
-                                    ));
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Lengkapi semua data')),
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF1D3671),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                // Konten formulir yang dapat digulir
+                Positioned.fill(
+                  // Mengatur padding atas untuk memastikan konten tidak tumpang tindih
+                  // dengan ikon panah dan teks "Get Started"
+                  // 24 (top padding arrow) + 28 (arrow height) + 16 (spacing setelah arrow)
+                  // + 28 (approx. 'Get Started' text height) + 12 (spacing setelah 'Get Started')
+                  top: 24 + 28 + 16 + 28 + 12 + 10, // Tambahkan sedikit ruang ekstra
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24), // Padding horizontal
+                    child: SingleChildScrollView(
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Konten formulir dimulai di sini
+                            Text(
+                              'Registrasi',
+                              style: GoogleFonts.poppins(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                            child: Text(
-                              'Daftar Sekarang',
+                            const SizedBox(height: 6),
+                            Text(
+                              'Silahkan registrasi untuk login',
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
-                          ),
+                            const SizedBox(height: 30),
+
+                            const SizedBox(height: 16),
+                            buildLabel('Nama Lengkap'),
+                            const SizedBox(height: 8),
+                            buildInputField('Enter your full name', _fullNameController),
+
+                            const SizedBox(height: 16),
+                            buildLabel('E-mail'),
+                            const SizedBox(height: 8),
+                            buildInputField('Enter your email', _emailController),
+
+                            const SizedBox(height: 16),
+                            buildLabel('Kata Sandi'),
+                            const SizedBox(height: 8),
+                            buildIconInputField('Password', Icons.lock, _passwordController, obscure: true),
+
+                            const SizedBox(height: 16),
+                            buildLabel('Nomor Telepon'),
+                            const SizedBox(height: 8),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: InternationalPhoneNumberInput(
+                                onInputChanged: (PhoneNumber number) {
+                                  this.number = number;
+                                },
+                                selectorConfig: const SelectorConfig(
+                                  selectorType: PhoneInputSelectorType.DROPDOWN,
+                                  setSelectorButtonAsPrefixIcon: true,
+                                ),
+                                initialValue: number,
+                                textStyle: GoogleFonts.inter(fontSize: 12),
+                                inputDecoration: InputDecoration(
+                                  hintText: 'Phone Number',
+                                  filled: true,
+                                  fillColor: Colors.transparent,
+                                  hintStyle: GoogleFonts.inter(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                  prefixIcon: const Icon(Icons.phone, color: Colors.black),
+                                ),
+                                keyboardType: TextInputType.number,
+                                inputBorder: InputBorder.none,
+                              ),
+                            ),
+
+                            const SizedBox(height: 16),
+                            buildLabel('Jenis Kelamin'),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                buildGenderOption('Laki - laki'),
+                                const SizedBox(width: 20),
+                                buildGenderOption('Perempuan'),
+                              ],
+                            ),
+
+                            const SizedBox(height: 16),
+                            BirthDateSelector(onDateSelected: (date) {
+                              setState(() {
+                                _selectedDate = date;
+                              });
+                            }),
+
+                            const SizedBox(height: 16),
+                            buildLabel('Kartu Tanda Pengenal'),
+                            const SizedBox(height: 8),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _idPhotoPath = 'path/to/selected_photo.jpg';
+                                });
+                                _showSnackBar('Foto KTP berhasil dipilih (simulasi)!');
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: Colors.transparent, width: 0),
+                                ),
+                                child: CustomPaint(
+                                  painter: DashedBorderPainter(borderRadius: 12),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(_idPhotoPath == null ? Icons.add : Icons.check_circle,
+                                            size: 20, color: _idPhotoPath == null ? Colors.black : Colors.green),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          _idPhotoPath == null ? 'Masukkan Foto KTP' : 'Foto KTP Terpilih',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 12,
+                                              color: _idPhotoPath == null ? Colors.black : Colors.green),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 34),
+                            Center(
+                              child: SizedBox(
+                                width: 210,
+                                height: 40,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      if (selectedGender == null) {
+                                        _showSnackBar('Pilih jenis kelamin Anda.');
+                                      } else if (_selectedDate == null) {
+                                        _showSnackBar('Lengkapi tanggal lahir Anda.');
+                                      } else if (_idPhotoPath == null) {
+                                        _showSnackBar('Masukkan foto KTP Anda.');
+                                      } else {
+                                        context.read<RegisterBloc>().add(RegisterSubmitted(
+                                              fullName: _fullNameController.text,
+                                              email: _emailController.text,
+                                              password: _passwordController.text,
+                                              phoneNumber: number.phoneNumber ?? '',
+                                              gender: selectedGender!,
+                                              birthDate: _selectedDate!.toIso8601String().split('T')[0],
+                                              idPhotoPath: _idPhotoPath!,
+                                            ));
+                                      }
+                                    } else {
+                                      _showSnackBar('Lengkapi semua data yang diperlukan.');
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF1D3671),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Daftar Sekarang',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Sudah memiliki akun? ',
+                                  style: GoogleFonts.poppins(fontSize: 12),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Navigasi ke halaman login, misalnya:
+                                    // context.go('/login');
+                                  },
+                                  child: Text(
+                                    'Masuk',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFF1D3671),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 40),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Sudah memiliki akun? ',
-                            style: GoogleFonts.poppins(fontSize: 12),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigasi ke halaman login, misalnya:
-                              // context.go('/login');
-                            },
-                            child: Text(
-                              'Masuk',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: const Color(0xFF1D3671),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ),
@@ -258,6 +327,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  // --- Widget helper methods (buildLabel, buildInputField, etc.) ---
   Widget buildLabel(String text) {
     return Text(
       text,
@@ -306,7 +376,7 @@ class _RegisterPageState extends State<RegisterPage> {
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
-        validator: (value) => value!.isEmpty ? 'Field tidak boleh kosong' : null, //Unit test
+        validator: (value) => value!.isEmpty ? 'Field tidak boleh kosong' : null,
       ),
     );
   }
@@ -326,7 +396,7 @@ class _RegisterPageState extends State<RegisterPage> {
         Text(
           gender,
           style: GoogleFonts.inter(
-            fontSize: 13,
+            fontSize: 12, // Mengubah ukuran font menjadi 12
             fontWeight: FontWeight.w500,
             color: Colors.grey,
           ),
@@ -357,6 +427,24 @@ class _BirthDateSelectorState extends State<BirthDateSelector> {
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
   ];
 
+  // Method untuk memeriksa dan memanggil onDateSelected
+  void _checkAndSetDate() {
+    if (selectedMonth != null && selectedDate != null && selectedYear != null) {
+      try {
+        final birthDate = DateTime(
+          int.parse(selectedYear!),
+          months.indexOf(selectedMonth!) + 1,
+          int.parse(selectedDate!),
+        );
+        widget.onDateSelected(birthDate);
+      } catch (e) {
+        // Handle invalid date combinations if necessary (e.g., Feb 30th)
+        // For simplicity, we just won't call onDateSelected for invalid dates
+        print('Invalid date combination: $e');
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -367,35 +455,26 @@ class _BirthDateSelectorState extends State<BirthDateSelector> {
         Row(
           children: [
             Expanded(child: _buildDropdown('Month', selectedMonth, months, (val) {
-              setState(() => selectedMonth = val);
+              setState(() {
+                selectedMonth = val;
+                _checkAndSetDate(); // Panggil saat nilai berubah
+              });
             })),
             const SizedBox(width: 8),
             Expanded(child: _buildDropdown('Date', selectedDate, days, (val) {
-              setState(() => selectedDate = val);
+              setState(() {
+                selectedDate = val;
+                _checkAndSetDate(); // Panggil saat nilai berubah
+              });
             })),
             const SizedBox(width: 8),
             Expanded(child: _buildDropdown('Year', selectedYear, years, (val) {
-              setState(() => selectedYear = val);
+              setState(() {
+                selectedYear = val;
+                _checkAndSetDate(); // Panggil saat nilai berubah
+              });
             })),
           ],
-        ),
-        const SizedBox(height: 8),
-        ElevatedButton(
-          onPressed: () {
-            if (selectedMonth != null && selectedDate != null && selectedYear != null) {
-              final birthDate = DateTime(
-                int.parse(selectedYear!),
-                months.indexOf(selectedMonth!) + 1,
-                int.parse(selectedDate!),
-              );
-              widget.onDateSelected(birthDate);
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Lengkapi tanggal lahir')),
-              );
-            }
-          },
-          child: const Text('Pilih Tanggal Lahir'),
         ),
       ],
     );
@@ -429,12 +508,14 @@ class DashedBorderPainter extends CustomPainter {
   final double strokeWidth;
   final double dashWidth;
   final double dashSpace;
+  final double borderRadius; // Add borderRadius parameter
 
   DashedBorderPainter({
     this.color = Colors.black,
     this.strokeWidth = 1.0,
     this.dashWidth = 6.0,
     this.dashSpace = 6.0,
+    this.borderRadius = 0.0, // Default to 0 if not provided
   });
 
   @override
@@ -444,53 +525,33 @@ class DashedBorderPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 
+    final RRect rRect = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(borderRadius),
+    );
+
+    // Create a Path from the RRect
     Path path = Path();
+    path.addRRect(rRect);
 
-    double currentX = 0;
-    while (currentX < size.width) {
-      path.moveTo(currentX, 0);
-      double endX = currentX + dashWidth;
-      if (endX > size.width) {
-        endX = size.width;
+    PathMetrics pathMetrics = path.computeMetrics();
+
+    Path dashedPath = Path(); // Path baru untuk menyimpan garis putus-putus
+    for (PathMetric pathMetric in pathMetrics) {
+      double distance = 0;
+      while (distance < pathMetric.length) {
+        double end = distance + dashWidth;
+        if (end > pathMetric.length) {
+          end = pathMetric.length; // Pastikan tidak melebihi panjang path
+        }
+        dashedPath.addPath(
+          pathMetric.extractPath(distance, end),
+          Offset.zero,
+        );
+        distance += dashWidth + dashSpace;
       }
-      path.lineTo(endX, 0);
-      currentX += dashWidth + dashSpace;
     }
-
-    double currentY = 0;
-    while (currentY < size.height) {
-      path.moveTo(size.width, currentY);
-      double endY = currentY + dashWidth;
-      if (endY > size.height) {
-        endY = size.height;
-      }
-      path.lineTo(size.width, endY);
-      currentY += dashWidth + dashSpace;
-    }
-
-    currentX = size.width;
-    while (currentX > 0) {
-      path.moveTo(currentX, size.height);
-      double endX = currentX - dashWidth;
-      if (endX < 0) {
-        endX = 0;
-      }
-      path.lineTo(endX, size.height);
-      currentX -= dashWidth + dashSpace;
-    }
-
-    currentY = size.height;
-    while (currentY > 0) {
-      path.moveTo(0, currentY);
-      double endY = currentY - dashWidth;
-      if (endY < 0) {
-        endY = 0;
-      }
-      path.lineTo(0, endY);
-      currentY -= dashWidth + dashSpace;
-    }
-
-    canvas.drawPath(path, paint);
+    canvas.drawPath(dashedPath, paint); // Gambar path yang sudah putus-putus
   }
 
   @override
@@ -499,7 +560,7 @@ class DashedBorderPainter extends CustomPainter {
         (oldDelegate.color != color ||
             oldDelegate.strokeWidth != strokeWidth ||
             oldDelegate.dashWidth != dashWidth ||
-            oldDelegate.dashSpace != dashSpace);
+            oldDelegate.dashSpace != dashSpace ||
+            oldDelegate.borderRadius != borderRadius); // Include borderRadius in shouldRepaint
   }
 }
-
