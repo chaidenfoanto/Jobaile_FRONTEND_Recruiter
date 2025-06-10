@@ -49,54 +49,102 @@ class NavigationWidget extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/icons/home.svg',
-                  width: 24,
-                  height: 24,
+                icon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/home.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/home_active.svg',
-                  width: 24,
-                  height: 24,
+                activeIcon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/home_active.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/icons/matching.svg',
-                  width: 24,
-                  height: 24,
+                icon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/matching.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/matching_active.svg',
-                  width: 24,
-                  height: 24,
+                activeIcon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/matching_active.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
                 label: 'Match',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/icons/chat.svg',
-                  width: 24,
-                  height: 24,
+                icon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/chat.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/chat_active.svg',
-                  width: 24,
-                  height: 24,
+                activeIcon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/chat_active.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
-                label: 'Chat',
+                label: 'Profile',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/icons/profile.svg',
-                  width: 24,
-                  height: 24,
+                icon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/profile.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
-                activeIcon: SvgPicture.asset(
-                  'assets/icons/profile_active.svg',
-                  width: 24,
-                  height: 24,
+                activeIcon: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      'assets/icons/profile_active.svg',
+                      width: 24,
+                      height: 24,
+                    ),
+                    SizedBox(height: 4), // jarak antara icon dan teks
+                  ],
                 ),
                 label: 'Profile',
               ),
