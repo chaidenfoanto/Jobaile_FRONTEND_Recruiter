@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ));
 
       // Navigasi langsung ke dashboard
-      context.go('/dashboard');
+      context.go('/main/home');
       return; // agar tidak lanjut ke BLoC
     }
     
@@ -214,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
               content: Text('Login berhasil!'),
               backgroundColor: Colors.green,
             ));
-            context.go('/dashboard'); // Ganti dengan rute yang sesuai
+            context.go('/main/home'); // Ganti dengan rute yang sesuai
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(state.message),

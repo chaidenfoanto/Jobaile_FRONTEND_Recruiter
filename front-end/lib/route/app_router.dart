@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '/views/chat.dart';
+import '/views/matchmaking.dart';
+import '/views/profile.dart';
+import '/widgets/navigation_widget.dart';
 import '/views/splash/splash_screen.dart';
 import '/views/onboarding/onboarding_screen.dart';
 import '/views/login.dart';
@@ -60,9 +64,27 @@ final GoRouter appRouter = GoRouter(
       path: '/register',
       builder: (context, state) => const RegisterScreen(),
     ),
-    GoRoute(
-      path: '/dashboard',
-      builder: (context, state) => const DashboardScreen(),
+    ShellRoute(
+      navigatorKey: GlobalKey<NavigatorState>(),
+      builder: (context, state, child) => NavigationWidget(),
+      routes: [
+        GoRoute(
+          path: '/main/home',
+          builder: (context, state) => DashboardScreen(),
+        ),
+        GoRoute(
+          path: '/main/matchmaking',
+          builder: (context, state) => MatchmakingScreen(),
+        ),
+        GoRoute(
+          path: '/main/chat',
+          builder: (context, state) => ChatScreen(),
+        ),
+        GoRoute(
+          path: '/main/profile',
+          builder: (context, state) => ProfileScreen(),
+        ),
+      ],
     ),
   ],
 );

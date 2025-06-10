@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '/color/color.dart';
 import '/cubit/navigation_cubit.dart';
@@ -32,39 +33,71 @@ class NavigationWidget extends StatelessWidget {
             onTap: (index) {
               context.read<NavigationCubit>().updateIndex(NavigationItem.values[index]);
             },
-            iconSize: 28.0, // ⬅️ Icon diperbesar
+            iconSize: 0, // supaya ukuran dikontrol manual via SVG
             selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.secondary,
+            unselectedItemColor: AppColors.primary,
             selectedLabelStyle: GoogleFonts.poppins(
-              fontSize: 6.0,
+              fontSize: 10,
               fontWeight: FontWeight.w500,
               color: AppColors.primary,
             ),
             unselectedLabelStyle: GoogleFonts.poppins(
-              fontSize: 6.0,
+              fontSize: 10,
               fontWeight: FontWeight.w500,
-              color: AppColors.secondary,
+              color: AppColors.primary,
             ),
             type: BottomNavigationBarType.fixed,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/home.svg')),
-                activeIcon: ImageIcon(AssetImage('assets/icons/home_active.svg')),
+                icon: SvgPicture.asset(
+                  'assets/icons/home.svg',
+                  width: 24,
+                  height: 24,
+                ),
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/home_active.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/matching.svg')),
-                activeIcon: ImageIcon(AssetImage('assets/icons/matching_active.svg')),
+                icon: SvgPicture.asset(
+                  'assets/icons/matching.svg',
+                  width: 24,
+                  height: 24,
+                ),
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/matching_active.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 label: 'Match',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/chat.svg')),
-                activeIcon: ImageIcon(AssetImage('assets/icons/chat_active.svg')),
+                icon: SvgPicture.asset(
+                  'assets/icons/chat.svg',
+                  width: 24,
+                  height: 24,
+                ),
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/chat_active.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 label: 'Chat',
               ),
               BottomNavigationBarItem(
-                icon: ImageIcon(AssetImage('assets/icons/profile.svg')),
-                activeIcon: ImageIcon(AssetImage('assets/icons/profile_active.svg')),
+                icon: SvgPicture.asset(
+                  'assets/icons/profile.svg',
+                  width: 24,
+                  height: 24,
+                ),
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/profile_active.svg',
+                  width: 24,
+                  height: 24,
+                ),
                 label: 'Profile',
               ),
             ],
