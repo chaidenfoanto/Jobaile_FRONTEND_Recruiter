@@ -26,131 +26,135 @@ class NavigationWidget extends StatelessWidget {
           return pages[state] ?? Center(child: Text('Not Found'));
         },
       ),
-      bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationItem>(
-        builder: (context, state) {
-          return BottomNavigationBar(
-            currentIndex: NavigationItem.values.indexOf(state),
-            onTap: (index) {
-              context.read<NavigationCubit>().updateIndex(NavigationItem.values[index]);
-            },
-            iconSize: 0, // supaya ukuran dikontrol manual via SVG
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.primary,
-            selectedLabelStyle: GoogleFonts.poppins(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primary,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 10,
+              offset: Offset(0, -2),
             ),
-            unselectedLabelStyle: GoogleFonts.poppins(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primary,
-            ),
-            type: BottomNavigationBarType.fixed,
-            items: [
-              BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/home.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                activeIcon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/home_active.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                label: 'Home',
+          ],
+        ),
+        child: BlocBuilder<NavigationCubit, NavigationItem>(
+          builder: (context, state) {
+            return BottomNavigationBar(
+              currentIndex: NavigationItem.values.indexOf(state),
+              onTap: (index) {
+                context.read<NavigationCubit>().updateIndex(NavigationItem.values[index]);
+              },
+              iconSize: 0, // dikontrol manual
+              selectedItemColor: AppColors.primary,
+              unselectedItemColor: AppColors.primary,
+              selectedLabelStyle: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primary,
               ),
-              BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/matching.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                activeIcon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/matching_active.svg',
-                      width: 24,
-                      height: 24,
-                    ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                label: 'Match',
+              unselectedLabelStyle: GoogleFonts.poppins(
+                fontSize: 10,
+                fontWeight: FontWeight.w500,
+                color: AppColors.primary,
               ),
-              BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/chat.svg',
-                      width: 24,
-                      height: 24,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/home.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
                     ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                activeIcon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/chat_active.svg',
-                      width: 24,
-                      height: 24,
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/home_active.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
                     ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
+                  ),
+                  label: 'Home',
                 ),
-                label: 'Profile',
-              ),
-              BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/profile.svg',
-                      width: 24,
-                      height: 24,
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/matching.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
                     ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
-                ),
-                activeIcon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      'assets/icons/profile_active.svg',
-                      width: 24,
-                      height: 24,
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/matching_active.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
                     ),
-                    SizedBox(height: 4), // jarak antara icon dan teks
-                  ],
+                  ),
+                  label: 'Match',
                 ),
-                label: 'Profile',
-              ),
-            ],
-          );
-        },
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/chat.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/chat_active.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                  label: 'Chat',
+                ),
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/profile.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset('assets/icons/profile_active.svg', width: 24, height: 24),
+                        SizedBox(height: 4),
+                      ],
+                    ),
+                  ),
+                  label: 'Profile',
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
