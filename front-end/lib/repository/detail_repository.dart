@@ -6,7 +6,7 @@ import 'package:detail_profil/models/recruiter.dart'; // Import model Recruiter
 class ProfileRepository { // Ganti nama kelas menjadi lebih umum
   final String _baseUrl = 'http://127.0.0.1:8000/api/detailprofileworker'; // Sesuaikan dengan rute Laravel
 
-  final String _authToken = 'SrMONzQYEE481ibN0Gudedg9U0HMYeQH4PcFlBBxf738d919';
+  final String _authToken = 'c3ndpJvG8Y50Hq9top8tnjrn0kzHn7BXRIuGBNoQ9d920c21';
 
   // Mengembalikan tipe data yang lebih umum, atau Map, atau Object
   // Jika Anda ingin mengembalikan objek spesifik, Anda mungkin perlu melewatkan
