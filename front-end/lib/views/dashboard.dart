@@ -1,227 +1,254 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:login/color/color.dart';
 
 class DashboardScreen extends StatelessWidget {
   final List<Map<String, dynamic>> helpers = [
     {
+      'image': 'assets/images/helper1.png',
       'name': 'Nur Harmawati Kudus',
       'age': 28,
       'description':
           'Berpengalaman lebih dari 3 tahun sebagai ART, terbiasa mengurus dan membersihkan rumah secara detail. Ramah dan disiplin dalam bekerja.',
-      'image': 'assets/images/helper1.jpg',
-      'rating': 4,
+      'rating': 4
     },
     {
+      'image': 'assets/images/helper2.png',
       'name': 'Siti Komariah',
       'age': 55,
       'description':
           'Ahli dalam memasak makanan rumahan, rapi dalam pekerjaan, dan sudah terbiasa bekerja dengan keluarga yang memiliki anak kecil dan hewan kelinci.',
-      'image': 'assets/images/helper2.jpg',
-      'rating': 4,
+      'rating': 4
     },
     {
+      'image': 'assets/images/helper3.png',
       'name': 'Yuni Lestari',
       'age': 31,
       'description':
           'Telaten dan sabar, cocok untuk menjaga lansia atau anak. Pernah bekerja sebagai ART tinggal dalam selama 2 tahun di Mks.',
-      'image': 'assets/images/helper3.jpg',
-      'rating': 4,
+      'rating': 4
     },
     {
+      'image': 'assets/images/helper4.png',
       'name': 'Kiran Natasya Kenta',
       'age': 19,
       'description':
-          'Berpengalaman merawat balita dengan penuh kasih dan perhatian. Terlatih dalam kebersihan serta disiplin waktu.',
-      'image': 'assets/images/helper4.jpg',
-      'rating': 4,
+          'Berpengalaman merawat balita dengan telaten dan sabar. Terbiasa mengikuti jadwal dan disiplin waktu.',
+      'rating': 3
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final screenWidth = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Column(
-        children: [
-          // Header
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            color: const Color(0xFF0C3C81),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Temukan Asistenmu!',
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Header
+            Container(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 6,
+                    offset: const Offset(0, 4),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Temukan Asistenmu!',
+                        style: TextStyle(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            items: [
-                              DropdownMenuItem(
-                                value: 'ART',
-                                child: Text('Asisten Rumah Tangga',
-                                    style: GoogleFonts.poppins(fontSize: 12)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: const Icon(Icons.search, color: AppColors.primary),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      // Dropdown Kategori
+                      Expanded(
+                        child: Container(
+                          height: 34,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.person_outline, size: 20),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Asisten Rumah Tangga',
+                                  style: TextStyle(fontSize: 14),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
+                              Icon(Icons.arrow_drop_down),
                             ],
-                            onChanged: (val) {},
-                            value: 'ART',
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            items: [
-                              DropdownMenuItem(
-                                value: 'Makassar',
-                                child: Text('Makassar, Sulawesi Selatan',
-                                    style: GoogleFonts.poppins(fontSize: 12)),
+                      const SizedBox(width: 8),
+                      // Dropdown Lokasi
+                      Expanded(
+                        child: Container(
+                          height: 34,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            children: const [
+                              Icon(Icons.location_on_outlined, size: 20),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Makassar, Sulawesi Selatan',
+                                  style: TextStyle(fontSize: 14),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
+                              Icon(Icons.arrow_drop_down),
                             ],
-                            onChanged: (val) {},
-                            value: 'Makassar',
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.search, color: Color(0xFF0C3C81)),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          // List of helpers
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              itemCount: helpers.length,
-              separatorBuilder: (_, __) =>
-                  const Divider(thickness: 1, height: 24),
-              itemBuilder: (context, index) {
-                final helper = helpers[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
+            // Daftar ART
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                itemCount: helpers.length,
+                separatorBuilder: (_, __) => const Divider(
+                  color: Color(0xFFD9D9D9),
+                  thickness: 2,
+                  height: 28,
+                ),
+                itemBuilder: (context, index) {
+                  final item = helpers[index];
+                  return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          helper['image'],
-                          width: 72,
-                          height: 72,
-                          fit: BoxFit.cover,
-                        ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: screenWidth * 0.25,
+                            child: AspectRatio(
+                              aspectRatio: 4 / 5,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  item['image'],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: List.generate(5, (i) {
+                              return Icon(
+                                Icons.star,
+                                color: i < item['rating'] ? Colors.amber : Colors.grey.shade300,
+                                size: 16,
+                              );
+                            }),
+                          ),
+                        ],
                       ),
                       const SizedBox(width: 12),
-
-                      // Info
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${helper['name']}',
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
+                              item['name'],
+                              style: const TextStyle(
+                                fontSize: 15.5,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
+                            const SizedBox(height: 2),
+                            Text('${item['age']} Tahun', style: const TextStyle(fontSize: 13)),
+                            const SizedBox(height: 6),
                             Text(
-                              '${helper['age']} Tahun',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              helper['description'],
+                              item['description'],
+                              style: const TextStyle(fontSize: 13, height: 1.4),
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.poppins(fontSize: 12),
                             ),
-                            const SizedBox(height: 8),
-
-                            // Rating & Button
-                            Row(
-                              children: [
-                                Row(
-                                  children: List.generate(5, (i) {
-                                    return Icon(
-                                      Icons.star,
-                                      color: i < helper['rating']
-                                          ? Colors.amber
-                                          : Colors.grey[300],
-                                      size: 16,
-                                    );
-                                  }),
+                            const SizedBox(height: 12),
+                            Container(
+                              height: 28,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.15),
+                                    blurRadius: 3,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: TextButton(
+                                onPressed: () {},
+                                style: TextButton.styleFrom(
+                                  backgroundColor: AppColors.secondary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  padding: EdgeInsets.zero,
                                 ),
-                                const Spacer(),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFFB5E3F7),
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
+                                child: const Text(
+                                  'Lihat Selengkapnya',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13.5,
+                                    color: Colors.black,
                                   ),
-                                  onPressed: () {},
-                                  child: Text(
-                                    'Lihat Selengkapnya',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
