@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../models/worker.dart';
+import 'package:instant_match/models/worker.dart';
 
 class WorkerDetailPage extends StatelessWidget {
   final Worker worker;
@@ -21,6 +21,7 @@ class WorkerDetailPage extends StatelessWidget {
         backgroundColor: Colors.blue.shade700,
         foregroundColor: Colors.white,
       ),
+      backgroundColor: Colors.grey[100], // Latar belakang yang lebih lembut
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -85,7 +86,7 @@ class WorkerDetailPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  elevation: 7,
+                  elevation: 3, // Kurangi elevasi untuk tampilan lebih datar
                 ),
               ),
             ),

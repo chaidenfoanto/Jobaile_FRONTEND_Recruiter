@@ -1,9 +1,8 @@
 // bloc/worker_bloc.dart
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'dart:math'; // Untuk random index
 
-import '../models/worker.dart';
+import 'package:instant_match/models/worker.dart';
 
 part 'worker_event.dart';
 part 'worker_state.dart';

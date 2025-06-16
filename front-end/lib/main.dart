@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'bloc/worker_bloc.dart';
+import 'BLoC/matchbloc/worker_bloc.dart';
 import 'models/worker.dart';
-import 'pages/worker_discovery_page.dart';
-import 'pages/worker_detail_page.dart';
+import 'views/detailpage.dart';
+import 'views/matchmaking.dart';
 
 void main() {
   runApp(const MyApp());
