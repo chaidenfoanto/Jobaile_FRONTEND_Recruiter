@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/workerDetail') {
           final worker = settings.arguments as Worker;
           return MaterialPageRoute(
-            builder: (context) => WorkerDetailPage(worker: worker),
+            builder: (context) => WorkerProfilePage(worker: worker),
           );
         }
         return null;

@@ -1,92 +1,236 @@
-// pages/worker_detail_page.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:instant_match/models/worker.dart';
 
-class WorkerDetailPage extends StatelessWidget {
+class WorkerProfilePage extends StatelessWidget {
   final Worker worker;
 
-  const WorkerDetailPage({super.key, required this.worker});
+  const WorkerProfilePage({super.key, required this.worker});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Profil ${worker.name}',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.blue.shade700,
-        foregroundColor: Colors.white,
-      ),
-      backgroundColor: Colors.grey[100], // Latar belakang yang lebih lembut
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Hero(
-                tag: 'worker_image_${worker.id}', // Tag unik untuk Hero animation
-                child: CircleAvatar(
-                  radius: 80,
-                  backgroundImage: NetworkImage(worker.imageUrl),
-                  onBackgroundImageError: (exception, stackTrace) {
-                    // Handle error if image fails to load
-                    debugPrint('Error loading image: $exception');
-                  },
-                  child: worker.imageUrl.isEmpty // Fallback for no image
-                      ? const Icon(Icons.person, size: 80, color: Colors.white)
-                      : null,
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              '${worker.name}, ${worker.age} Tahun',
-              style: GoogleFonts.poppins(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const Divider(height: 30, thickness: 1),
-            _buildDetailRow(
-              icon: Icons.info_outline,
-              label: 'Tentang Saya:',
-              value: worker.description,
-            ),
-            _buildDetailRow(
-              icon: Icons.work_outline,
-              label: 'Pengalaman:',
-              value: worker.experience,
-            ),
-            // Tambahkan detail dummy lainnya di sini sesuai kebutuhan UI
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  // Contoh aksi: chat atau panggil
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Menghubungi ${worker.name}...')),
-                  );
-                },
-                icon: const Icon(Icons.message),
-                label: Text(
-                  'Hubungi Sekarang',
-                  style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green.shade600,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+            // Custom AppBar
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              height: 60,
+              color: const Color(0xFF0C3C78),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
-                  elevation: 3, // Kurangi elevasi untuk tampilan lebih datar
+                  Text(
+                    'Profil Pekerja',
+                    style: GoogleFonts.poppins(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const Icon(Icons.bookmark_border, color: Colors.white),
+                ],
+              ),
+            ),
+
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Profile Header
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: worker.imagePath.isNotEmpty
+                              ? Image(
+                                  image: worker.isAsset
+                                      ? AssetImage(worker.imagePath)
+                                      : NetworkImage(worker.imagePath) as ImageProvider,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                              : Container(
+                                  width: 100,
+                                  height: 100,
+                                  color: Colors.grey[300],
+                                  child: const Icon(Icons.person, size: 40),
+                                ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                worker.name,
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Umur ${worker.age} Tahun',
+                                style: GoogleFonts.poppins(fontSize: 12),
+                              ),
+                              Text(
+                                worker.location,
+                                style: GoogleFonts.poppins(fontSize: 12),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  ...List.generate(5, (index) {
+                                    if (index < worker.rating.floor()) {
+                                      return const Icon(Icons.star, color: Colors.amber, size: 16);
+                                    } else {
+                                      return const Icon(Icons.star_border, color: Colors.amber, size: 16);
+                                    }
+                                  }),
+                                  const SizedBox(width: 4),
+                                  Text(worker.rating.toStringAsFixed(1), style: GoogleFonts.poppins(fontSize: 12)),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Deskripsi
+                    Text(
+                      'Deskripsi',
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const Divider(height: 20),
+                    Text(
+                      worker.description,
+                      style: GoogleFonts.poppins(fontSize: 13),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Pengalaman
+                    Text(
+                      'Pengalaman',
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const Divider(height: 20),
+                    Text(
+                      worker.experienceTitle,
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      worker.experiencePeriod,
+                      style: GoogleFonts.poppins(),
+                    ),
+                    const SizedBox(height: 8),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: worker.experienceDetails
+                          .map((item) => BulletText(item))
+                          .toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Bottom Buttons - styled to match discovery page
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Tombol Ulasan
+                    ElevatedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Fitur ulasan belum tersedia.")),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(160, 37),
+                        backgroundColor: const Color(0xFFB9E6FF),
+                        foregroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 2,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Ulasan',
+                              style: GoogleFonts.poppins(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Icon(Icons.chevron_right, size: 16),
+                        ],
+                      ),
+                    ),
+
+                    // Spacer
+                    const SizedBox(width: 10),
+
+                    // Tombol Kontak ART
+                    ElevatedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Menghubungi ${worker.name}...")),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(160, 37),
+                        backgroundColor: const Color(0xFFB9FFBA),
+                        foregroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        elevation: 2,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Kontak ART',
+                              style: GoogleFonts.poppins(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Icon(Icons.chat, size: 16),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -95,38 +239,21 @@ class WorkerDetailPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildDetailRow({required IconData icon, required String label, required String value}) {
+class BulletText extends StatelessWidget {
+  final String text;
+  const BulletText(this.text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(icon, color: Colors.blue.shade700, size: 24),
-              const SizedBox(width: 10),
-              Text(
-                label,
-                style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-          Padding(
-            padding: const EdgeInsets.only(left: 34.0),
-            child: Text(
-              value,
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                color: Colors.black54,
-              ),
-            ),
-          ),
+          const Text("• ", style: TextStyle(fontSize: 14)),
+          Expanded(child: Text(text, style: GoogleFonts.poppins(fontSize: 13))),
         ],
       ),
     );

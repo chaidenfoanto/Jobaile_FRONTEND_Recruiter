@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:instant_match/BLoC/matchbloc/worker_bloc.dart';
 import 'package:instant_match/models/worker.dart';
+import 'package:instant_match/views/detailpage.dart'; // pastikan path ini sesuai struktur folder kamu
 
 class WorkerDiscoveryPage extends StatelessWidget {
   const WorkerDiscoveryPage({super.key});
@@ -17,7 +18,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
           color: Colors.white,
           child: Stack(
             children: [
-              // Back button
+              // Tombol kembali
               Positioned(
                 top: 48,
                 left: 21,
@@ -47,7 +48,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
                 ),
               ),
 
-              // Title
+              // Judul
               Positioned(
                 top: 53,
                 left: 0,
@@ -87,10 +88,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
   }
 
   Widget _buildWorkerCard(BuildContext context, Worker worker) {
-    // Tentukan lebar dan tinggi yang diinginkan untuk tombol
-    // Perhatikan: ini harus disesuaikan dengan lebar layar Anda
-    // agar tidak terjadi overflow. Jika 180 terlalu besar, kecilkan.
-    const double desiredButtonWidth = 160.0; // Contoh: mencoba 160.0 (sebelumnya 145)
+    const double desiredButtonWidth = 160.0;
     const double buttonHeight = 37.0;
 
     return SingleChildScrollView(
@@ -98,40 +96,47 @@ class WorkerDiscoveryPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Image
+          // Gambar
           Padding(
             padding: const EdgeInsets.only(top: 0.0),
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  worker.imageUrl,
-                  fit: BoxFit.cover,
-                  height: 424,
-                  width: 350,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 424,
-                      width: 350,
-                      color: Colors.grey[300],
-                      child: Center(
-                        child: Icon(Icons.person, size: 80, color: Colors.grey[600]),
+                child: worker.isAsset
+                    ? Image.asset(
+                        worker.imagePath,
+                        fit: BoxFit.cover,
+                        height: 424,
+                        width: 350,
+                      )
+                    : Image.network(
+                        worker.imagePath,
+                        fit: BoxFit.cover,
+                        height: 424,
+                        width: 350,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            height: 424,
+                            width: 350,
+                            color: Colors.grey[300],
+                            child: Center(
+                              child: Icon(Icons.person, size: 80, color: Colors.grey[600]),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ),
           ),
           const SizedBox(height: 20),
 
-          // Worker info
+          // Info pekerja
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Name and age
+                // Nama dan umur
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -169,7 +174,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Short description
+                // Deskripsi singkat
                 Text(
                   worker.shortDescription,
                   style: GoogleFonts.poppins(
@@ -183,32 +188,33 @@ class WorkerDiscoveryPage extends StatelessWidget {
 
           const SizedBox(height: 28),
 
-          // Buttons with right icon - Menggunakan fixedSize kembali
+          // Tombol
           Padding(
-            // Pertimbangkan untuk mengurangi padding horizontal ini jika masih overflow
-            // Misalnya: const EdgeInsets.symmetric(horizontal: 0.0),
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // Tombol lihat profil
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/workerDetail', arguments: worker);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => WorkerProfilePage(worker: worker),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(desiredButtonWidth, buttonHeight), // <--- Mengatur ukuran di sini
+                    fixedSize: const Size(desiredButtonWidth, buttonHeight),
                     backgroundColor: Colors.lightBlue.shade100,
                     foregroundColor: Colors.blue.shade900,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    // Jika teks/ikon masih overflow, Anda bisa hapus padding default ElevatedButton
-                    // padding: EdgeInsets.zero,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Gunakan Flexible lagi untuk teks di dalam fixedSize button agar tidak overflow
                       Flexible(
                         child: Text(
                           'Lihat Profil',
@@ -222,24 +228,23 @@ class WorkerDiscoveryPage extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                // Tombol selanjutnya
                 ElevatedButton(
                   onPressed: () {
                     context.read<WorkerBloc>().add(LoadNextWorkerEvent());
                   },
                   style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(desiredButtonWidth, buttonHeight), // <--- Mengatur ukuran di sini
+                    fixedSize: const Size(desiredButtonWidth, buttonHeight),
                     backgroundColor: const Color(0xFFFFC1CC),
                     foregroundColor: Colors.pink.shade900,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    // Jika teks/ikon masih overflow, Anda bisa hapus padding default ElevatedButton
-                    // padding: EdgeInsets.zero,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Gunakan Flexible lagi untuk teks di dalam fixedSize button agar tidak overflow
                       Flexible(
                         child: Text(
                           'Selanjutnya',

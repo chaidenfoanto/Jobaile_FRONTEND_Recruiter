@@ -71,6 +71,9 @@ flutter:
 
   assets:
     - assets/foto/arrow_only.svg
+    - assets/foto/nur.png
+    - assets/foto/kiran.png
+    - assets/foto/yuni.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
