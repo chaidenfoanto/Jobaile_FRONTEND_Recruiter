@@ -53,10 +53,10 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(height: 20),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(40), // Corner radius: 40
-                      child: Image.network(
-                        'https://i.ibb.co/SK5X5Nr/julia.jpg',
-                        width: 143, // Width: 143
-                        height: 143, // Height: 143
+                      child: Image.asset( // <-- UBAH DI SINI: Image.network menjadi Image.asset
+                        'assets/foto/Julia.png', // <-- Path ke gambar aset Anda
+                        width: 143,
+                        height: 143,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -133,20 +133,6 @@ class ProfilePage extends StatelessWidget {
               return Center(child: Text('Gagal memuat profil'));
             }
           },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Color(0xFF0B4C86),
-          unselectedItemColor: Colors.black45,
-          currentIndex: 3,
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
-          unselectedLabelStyle: GoogleFonts.poppins(fontSize: 10),
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.connect_without_contact), label: "Match"),
-            BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          ],
         ),
       ),
     );

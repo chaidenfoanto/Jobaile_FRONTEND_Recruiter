@@ -10,9 +10,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       // Data dummy user
       final user = User(
-        name: 'Ariana Grande',
-        email: 'ariana@example.com',
-        phoneNumber: '+62 812 3456 7890',
+        name: 'Julia Harayu Wati',
+        email: 'julia.harayuti01@gmail.com',
+        phoneNumber: '+62 385749464',
       );
 
       emit(ProfileLoaded(user));

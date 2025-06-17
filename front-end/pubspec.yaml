@@ -66,14 +66,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/foto/Chat.png
-    - assets/foto/Home.png
-    - assets/foto/Matching.png
-    - assets/foto/Profile.png
-    - assets/foto/Chat_active.png
-    - assets/foto/Home_active.png
-    - assets/foto/Matching_active.png
-    - assets/foto/Profile_active.png
+    - assets/foto/Julia.png
 
 
   # To add assets to your application, add an assets section, like this:
