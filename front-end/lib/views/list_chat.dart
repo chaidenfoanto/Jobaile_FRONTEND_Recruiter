@@ -54,12 +54,15 @@ class _ChatListPageState extends State<ChatListPage> {
         child: AppBar(
           backgroundColor: const Color(0xFF0C3C78),
           elevation: 0,
-          title: Text(
-            'Chat',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 14.0),
+            child: Text(
+              'Chat',
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ),
@@ -155,35 +158,35 @@ class _ChatListPageState extends State<ChatListPage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: const Color(0xFF2B4055),
-        unselectedItemColor: Colors.grey[600],
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        showUnselectedLabels: true,
-        selectedLabelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-        unselectedLabelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w500),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people_outline),
-            label: 'Match',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _selectedIndex,
+      //   onTap: _onItemTapped,
+      //   selectedItemColor: const Color(0xFF2B4055),
+      //   unselectedItemColor: Colors.grey[600],
+      //   backgroundColor: Colors.white,
+      //   type: BottomNavigationBarType.fixed,
+      //   showUnselectedLabels: true,
+      //   selectedLabelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+      //   unselectedLabelStyle: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home_outlined),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.people_outline),
+      //       label: 'Match',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.chat_bubble_outline),
+      //       label: 'Chat',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person_outline),
+      //       label: 'Profile',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

@@ -51,51 +51,51 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(90),
-          child: AppBar(
-            backgroundColor: const Color(0xFF0C3C78),
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            titleSpacing: 0,
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Back button
-                  IconButton(
+        preferredSize: const Size.fromHeight(90),
+        child: AppBar(
+          backgroundColor: const Color(0xFF0C3C78),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 20.0), // Menurunkan seluruh row
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () => Navigator.pop(context),
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.center,
                   ),
-                  const SizedBox(width: 4),
-
-                  // --- PERUBAHAN DI SINI: Avatar menggunakan AssetImage ---
-                  const CircleAvatar(
-                    radius: 24,
-                    backgroundImage: AssetImage('assets/foto/nur.png'), // <-- Menggunakan gambar dari asset
-                    // Hapus `child: Text('NR')` karena sudah ada backgroundImage
-                  ),
-                  const SizedBox(width: 12),
-
-                  // Name text
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Nur Harmawati Kudus',
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                ),
+                const SizedBox(width: 8),
+                const CircleAvatar(
+                  radius: 24,
+                  backgroundImage: AssetImage('assets/foto/nur.png'),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Nur Harmawati Kudus',
+                      style: GoogleFonts.poppins(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -188,7 +188,6 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-// Chat Bubble Widget with Tail
 class BubbleMessage extends StatelessWidget {
   final String text;
   final bool isSender;
@@ -234,7 +233,6 @@ class BubbleMessage extends StatelessWidget {
   }
 }
 
-// Triangle Tail Custom Painter
 class TriangleTail extends CustomPainter {
   final Color color;
 
