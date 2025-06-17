@@ -17,7 +17,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
           color: Colors.white,
           child: Stack(
             children: [
-              // Back button with shadow on corners
+              // Back button
               Positioned(
                 top: 48,
                 left: 21,
@@ -47,7 +47,7 @@ class WorkerDiscoveryPage extends StatelessWidget {
                 ),
               ),
 
-              // Centered title
+              // Title
               Positioned(
                 top: 53,
                 left: 0,
@@ -87,14 +87,20 @@ class WorkerDiscoveryPage extends StatelessWidget {
   }
 
   Widget _buildWorkerCard(BuildContext context, Worker worker) {
+    // Tentukan lebar dan tinggi yang diinginkan untuk tombol
+    // Perhatikan: ini harus disesuaikan dengan lebar layar Anda
+    // agar tidak terjadi overflow. Jika 180 terlalu besar, kecilkan.
+    const double desiredButtonWidth = 160.0; // Contoh: mencoba 160.0 (sebelumnya 145)
+    const double buttonHeight = 37.0;
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 4.0, left: 16, right: 16, bottom: 24),
+      padding: const EdgeInsets.only(top: 0.0, left: 16, right: 16, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Gambar tengah
+          // Image
           Padding(
-            padding: const EdgeInsets.only(top: 4.0),
+            padding: const EdgeInsets.only(top: 0.0),
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
@@ -117,14 +123,15 @@ class WorkerDiscoveryPage extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20), // naikkan teks lebih dekat ke image
+          const SizedBox(height: 20),
 
+          // Worker info
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Nama dan usia
+                // Name and age
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -176,47 +183,78 @@ class WorkerDiscoveryPage extends StatelessWidget {
 
           const SizedBox(height: 28),
 
-          // Tombol aksi
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/workerDetail', arguments: worker);
-                },
-                icon: const Icon(Icons.person),
-                label: Text(
-                  'Lihat Profil',
-                  style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightBlue.shade100,
-                  foregroundColor: Colors.blue.shade900,
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+          // Buttons with right icon - Menggunakan fixedSize kembali
+          Padding(
+            // Pertimbangkan untuk mengurangi padding horizontal ini jika masih overflow
+            // Misalnya: const EdgeInsets.symmetric(horizontal: 0.0),
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/workerDetail', arguments: worker);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(desiredButtonWidth, buttonHeight), // <--- Mengatur ukuran di sini
+                    backgroundColor: Colors.lightBlue.shade100,
+                    foregroundColor: Colors.blue.shade900,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    // Jika teks/ikon masih overflow, Anda bisa hapus padding default ElevatedButton
+                    // padding: EdgeInsets.zero,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Gunakan Flexible lagi untuk teks di dalam fixedSize button agar tidak overflow
+                      Flexible(
+                        child: Text(
+                          'Lihat Profil',
+                          style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Icon(Icons.person, size: 20),
+                    ],
                   ),
                 ),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  context.read<WorkerBloc>().add(LoadNextWorkerEvent());
-                },
-                icon: const Icon(Icons.arrow_forward),
-                label: Text(
-                  'Selanjutnya',
-                  style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFFC1CC),
-                  foregroundColor: Colors.pink.shade900,
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<WorkerBloc>().add(LoadNextWorkerEvent());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(desiredButtonWidth, buttonHeight), // <--- Mengatur ukuran di sini
+                    backgroundColor: const Color(0xFFFFC1CC),
+                    foregroundColor: Colors.pink.shade900,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    // Jika teks/ikon masih overflow, Anda bisa hapus padding default ElevatedButton
+                    // padding: EdgeInsets.zero,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Gunakan Flexible lagi untuk teks di dalam fixedSize button agar tidak overflow
+                      Flexible(
+                        child: Text(
+                          'Selanjutnya',
+                          style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Icon(Icons.arrow_forward, size: 20),
+                    ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
