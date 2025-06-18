@@ -93,11 +93,23 @@ class WorkerProfilePage extends StatelessWidget {
                               const SizedBox(height: 8),
                               Row(
                                 children: [
-                                  ...List.generate(5, (index) {
-                                    if (index < worker.rating.floor()) {
+                                  ...List.generate(5, (i) {
+                                    double rating = worker.rating;
+                                    if (i < rating.floor()) {
                                       return const Icon(Icons.star, color: Colors.amber, size: 16);
+                                    } else if (i < rating) {
+                                      double partial = rating - i;
+                                      return Stack(
+                                        children: [
+                                          Icon(Icons.star, color: Colors.grey.shade300, size: 16),
+                                          ClipRect(
+                                            clipper: _PartialClipper(partial),
+                                            child: const Icon(Icons.star, color: Colors.amber, size: 16),
+                                          ),
+                                        ],
+                                      );
                                     } else {
-                                      return const Icon(Icons.star_border, color: Colors.amber, size: 16);
+                                      return Icon(Icons.star, color: Colors.grey.shade300, size: 16);
                                     }
                                   }),
                                   const SizedBox(width: 4),
@@ -260,4 +272,16 @@ class BulletText extends StatelessWidget {
       ),
     );
   }
+}
+
+class _PartialClipper extends CustomClipper<Rect> {
+  final double fraction;
+
+  _PartialClipper(this.fraction);
+
+  @override
+  Rect getClip(Size size) => Rect.fromLTWH(0, 0, size.width * fraction, size.height);
+
+  @override
+  bool shouldReclip(_PartialClipper oldClipper) => oldClipper.fraction != fraction;
 }
