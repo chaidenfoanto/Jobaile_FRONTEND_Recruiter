@@ -2,10 +2,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
-import 'package:instant_match/models/worker.dart';
+import '/models/worker.dart';
 
-part 'worker_event.dart';
-part 'worker_state.dart';
+part 'matchmaking_event.dart';
+part 'matchmaking_state.dart';
 
 class WorkerBloc extends Bloc<WorkerEvent, WorkerState> {
   WorkerBloc() : super(WorkerInitial()) {

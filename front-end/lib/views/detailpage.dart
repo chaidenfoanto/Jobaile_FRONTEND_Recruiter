@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instant_match/color/color.dart';
-import 'package:instant_match/models/worker.dart';
+import '/color/color.dart';
+import '/models/worker.dart';
 
 class WorkerProfilePage extends StatelessWidget {
   final Worker worker;

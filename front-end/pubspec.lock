@@ -192,15 +192,9 @@ packages:
       sha256: "5b236382b47ee411741447c1f1e111459c941ea1b3f2b540dde54c210a3662af"
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
     version: "3.1.0"
   equatable:
     dependency: transitive
-=======
-    version: "3.0.1"
-  equatable:
-    dependency: "direct main"
->>>>>>> instant-match
     description:
       name: equatable
       sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"

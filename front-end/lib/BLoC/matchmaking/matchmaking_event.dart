@@ -1,5 +1,5 @@
 // bloc/worker_event.dart
-part of 'worker_bloc.dart';
+part of 'matchmaking_bloc.dart';
 
 @immutable
 sealed class WorkerEvent {}

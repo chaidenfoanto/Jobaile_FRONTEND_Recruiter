@@ -1,40 +1,13 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-class MatchmakingScreen extends StatefulWidget {
-  const MatchmakingScreen({super.key});
-
-  @override
-  State<MatchmakingScreen> createState() => _MatchmakingScreenState();
-}
-
-class _MatchmakingScreenState extends State<MatchmakingScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'Matchmaking',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Poppins',
-          ),
-        ),
-      ),
-    );
-  }
-}
-=======
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instant_match/BLoC/matchbloc/worker_bloc.dart';
-import 'package:instant_match/models/worker.dart';
-import 'package:instant_match/views/detailpage.dart'; // pastikan path ini sesuai struktur folder kamu
+import '../BLoC/matchmaking/matchmaking_bloc.dart';
+import '/models/worker.dart';
+import '/views/detailpage.dart'; // pastikan path ini sesuai struktur folder kamu
 
-class WorkerDiscoveryPage extends StatelessWidget {
-  const WorkerDiscoveryPage({super.key});
+class MatchmakingScreen extends StatelessWidget {
+  const MatchmakingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -293,4 +266,3 @@ class WorkerDiscoveryPage extends StatelessWidget {
     );
   }
 }
->>>>>>> instant-match
