@@ -14,6 +14,8 @@ import '/views/onboarding/onboarding_screen.dart';
 import '/views/login.dart';
 import '/views/register.dart';
 import '/views/dashboard.dart';
+import '/views/detailpage.dart';
+import '/models/worker.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -80,6 +82,16 @@ final GoRouter appRouter = GoRouter(
               child: DashboardScreen(),
             );
           },
+          routes: [
+            GoRoute(
+              path: 'worker/:id',
+              builder: (context, state) {
+                // The worker object is passed as extra data
+                final worker = state.extra as Worker;
+                return WorkerProfilePage(worker: worker);
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: '/main/matchmaking',
