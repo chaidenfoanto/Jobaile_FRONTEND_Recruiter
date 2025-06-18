@@ -4,7 +4,7 @@ import 'package:login/color/color.dart';
 class DashboardScreen extends StatelessWidget {
   final List<Map<String, dynamic>> helpers = [
     {
-      'image': 'assets/images/helper1.png',
+      'image': 'assets/images/helper-dummy-dashboard/helper1.png',
       'name': 'Nur Harmawati Kudus',
       'age': 28,
       'description':
@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
       'rating': 4.5
     },
     {
-      'image': 'assets/images/helper2.png',
+      'image': 'assets/images/helper-dummy-dashboard/helper2.png',
       'name': 'Siti Komariah',
       'age': 55,
       'description':
@@ -20,7 +20,7 @@ class DashboardScreen extends StatelessWidget {
       'rating': 4
     },
     {
-      'image': 'assets/images/helper3.png',
+      'image': 'assets/images/helper-dummy-dashboard/helper3.png',
       'name': 'Yuni Lestari',
       'age': 31,
       'description':
@@ -28,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
       'rating': 4
     },
     {
-      'image': 'assets/images/helper4.png',
+      'image': 'assets/images/helper-dummy-dashboard/helper4.png',
       'name': 'Kiran Natasya Kenta',
       'age': 19,
       'description':
