@@ -5,7 +5,7 @@ import '/BLoC/dashboard/dashboard_bloc.dart';
 import '/BLoC/dashboard/dashboard_event.dart';
 import '/repository/dashboard_repository.dart';
 
-import '/views/chat.dart';
+import '../views/chat/list_chat.dart';
 import '/views/matchmaking.dart';
 import '/views/profile.dart';
 import '/widgets/navigation_widget.dart';
@@ -102,7 +102,7 @@ final GoRouter appRouter = GoRouter(
         // ),
         GoRoute(
           path: '/main/chat',
-          builder: (context, state) => ChatScreen(),
+          builder: (context, state) => ChatListPage(),
         ),
         GoRoute(
           path: '/main/profile',

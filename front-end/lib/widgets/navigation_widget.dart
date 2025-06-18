@@ -8,7 +8,7 @@ import '/color/color.dart';
 import '../BLoC/navigation/navigation_cubit.dart';
 import '/views/dashboard.dart';
 import '/views/matchmaking.dart';
-import '/views/chat.dart';
+import '../views/chat/chat.dart';
 import '/views/profile.dart';
 
 class NavigationWidget extends StatelessWidget {

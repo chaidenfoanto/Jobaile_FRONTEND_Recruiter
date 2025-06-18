@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat/BLoC/BLoC/chat_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:instant_match/color/color.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+import '../../BLoC/chat/chat_bloc.dart';
+
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatScreen> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -51,15 +53,16 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(90),
+        preferredSize: const Size.fromHeight(70),
         child: AppBar(
-          backgroundColor: const Color(0xFF0C3C78),
+          backgroundColor: AppColors.primary,
           elevation: 0,
           automaticallyImplyLeading: false,
           titleSpacing: 0,
           title: Padding(
-            padding: const EdgeInsets.only(top: 20.0), // Menurunkan seluruh row
+            padding: const EdgeInsets.only(top: 15.0), // Tambahkan padding atas agar konten di tengah
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center, // pastikan konten di tengah
               children: [
                 SizedBox(
                   width: 40,
@@ -73,8 +76,8 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 const SizedBox(width: 8),
                 const CircleAvatar(
-                  radius: 24,
-                  backgroundImage: AssetImage('assets/foto/nur.png'),
+                  radius: 20,
+                  backgroundImage: AssetImage('assets/images/helper_dashboard/helper1.png'),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -171,7 +174,7 @@ class _ChatPageState extends State<ChatPage> {
                   height: 40,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Color(0xFF0C3C78),
+                    color: AppColors.primary,
                   ),
                   child: IconButton(
                     onPressed: _sendMessage,

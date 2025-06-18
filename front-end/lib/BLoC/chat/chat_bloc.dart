@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:chat/models/message.dart'; // Import model pesan
+import '/models/message.dart'; // Import model pesan
 
 part 'chat_event.dart';
 part 'chat_state.dart';
