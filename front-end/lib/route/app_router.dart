@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:login/BLoC/dashboard/dashboard_bloc.dart';
+import 'package:login/BLoC/dashboard/dashboard_event.dart';
+import 'package:login/repository/dashboard_repository.dart';
 
 import '/views/chat.dart';
 import '/views/matchmaking.dart';
@@ -66,11 +70,16 @@ final GoRouter appRouter = GoRouter(
     ),
     ShellRoute(
       navigatorKey: GlobalKey<NavigatorState>(),
-      builder: (context, state, child) => NavigationWidget(),
+      builder: (context, state, child) => NavigationWidget(child: child),
       routes: [
         GoRoute(
           path: '/main/home',
-          builder: (context, state) => DashboardScreen(),
+          builder: (context, state) {
+            return BlocProvider(
+              create: (_) => DashboardBloc(DashboardRepository())..add(LoadWorkers()),
+              child: DashboardScreen(),
+            );
+          },
         ),
         GoRoute(
           path: '/main/matchmaking',

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '/color/color.dart';
-import '/cubit/navigation_cubit.dart';
+import '../BLoC/navigation/navigation_cubit.dart';
 import '/views/dashboard.dart';
 import '/views/matchmaking.dart';
 import '/views/chat.dart';
@@ -17,6 +17,10 @@ class NavigationWidget extends StatelessWidget {
     NavigationItem.chat: ChatScreen(),
     NavigationItem.profile: ProfileScreen(),
   };
+
+  final Widget child;
+
+  NavigationWidget({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
