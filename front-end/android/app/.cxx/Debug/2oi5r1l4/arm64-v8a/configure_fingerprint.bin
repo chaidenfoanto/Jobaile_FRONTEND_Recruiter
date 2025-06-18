@@ -2,6 +2,7 @@ C/C++ Structured Log[
 Y
 W/Users/mbp/Desktop/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ðè‰Úò2¤ èµåíë2†
 ƒ
 €/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/additional_project_files.txt	ðè‰Úò2 ÒëÓò2
@@ -26,3 +27,29 @@ x
 v/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/prefab_config.json	ñè‰Úò2( øëÓò2
 }
 {/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/symbol_folder_index.txt	ñè‰Úò2r øëÓò2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ÃºÄöí2¤ èµåíë2†
+ƒ
+€/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/additional_project_files.txt	ÃºÄöí2 ÿžˆëì2
+
+}/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/android_gradle_build.json	ÃºÄöí2î ‰Ÿˆëì2ˆ
+…
+‚/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/android_gradle_build_mini.json	ÃºÄöí2ý “Ÿˆëì2s
+q
+o/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/build.ninja	ÃºÄöí2¬Ã Åžˆëì2w
+u
+s/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/build.ninja.txt	ÃºÄöí2|
+z
+x/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/build_file_index.txt	ÃºÄöí2W ˜Ÿˆëì2}
+{
+y/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/compile_commands.json	ÃºÄöí2	
+
+}/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/compile_commands.json.bin	ÃºÄöí2
+‰
+†
+ƒ/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/metadata_generation_command.txt	ÃºÄöí2ë —Ÿˆëì2z
+x
+v/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/prefab_config.json	ÃºÄöí2( —Ÿˆëì2
+}
+{/Users/mbp/Documents/Jobaile_FRONTEND_Recruiter/front-end/android/app/.cxx/Debug/2oi5r1l4/arm64-v8a/symbol_folder_index.txt	ÃºÄöí2r ˜Ÿˆëì2
+>>>>>>> instant-match
