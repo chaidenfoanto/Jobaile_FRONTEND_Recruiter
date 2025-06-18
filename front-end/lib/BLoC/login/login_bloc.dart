@@ -1,6 +1,6 @@
 // login_bloc.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/services/loginapi.dart';
+import '/services/loginapi.dart';
 
 import 'login_event.dart';
 import 'login_state.dart';

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/widgets/worker_card.dart';
+import '/widgets/worker_card.dart';
 import '../../BLoC/dashboard/dashboard_bloc.dart';
 import '../../BLoC/dashboard/dashboard_event.dart';
 import '../../BLoC/dashboard/dashboard_state.dart';

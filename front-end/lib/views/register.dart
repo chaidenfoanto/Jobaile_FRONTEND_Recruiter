@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:login/color/color.dart';
+import '/color/color.dart';
 
 import '../BLoC/register/register_bloc.dart';
 import '../BLoC/register/register_event.dart';

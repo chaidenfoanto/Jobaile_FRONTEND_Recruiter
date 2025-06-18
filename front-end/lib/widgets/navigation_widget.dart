@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '/color/color.dart';
 import '../BLoC/navigation/navigation_cubit.dart';
@@ -25,11 +26,7 @@ class NavigationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NavigationCubit, NavigationItem>(
-        builder: (context, state) {
-          return pages[state] ?? Center(child: Text('Not Found'));
-        },
-      ),
+      body: child,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -46,7 +43,24 @@ class NavigationWidget extends StatelessWidget {
             return BottomNavigationBar(
               currentIndex: NavigationItem.values.indexOf(state),
               onTap: (index) {
-                context.read<NavigationCubit>().updateIndex(NavigationItem.values[index]);
+                final navigationItem = NavigationItem.values[index];
+                context.read<NavigationCubit>().updateIndex(navigationItem);
+                
+                // Navigate to the appropriate route
+                switch (navigationItem) {
+                  case NavigationItem.home:
+                    GoRouter.of(context).go('/main/home');
+                    break;
+                  case NavigationItem.match:
+                    GoRouter.of(context).go('/main/matchmaking');
+                    break;
+                  case NavigationItem.chat:
+                    GoRouter.of(context).go('/main/chat');
+                    break;
+                  case NavigationItem.profile:
+                    GoRouter.of(context).go('/main/profile');
+                    break;
+                }
               },
               iconSize: 0, // dikontrol manual
               selectedItemColor: AppColors.primary,

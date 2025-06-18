@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login/BLoC/dashboard/dashboard_bloc.dart';
-import 'package:login/repository/dashboard_repository.dart';
+import '/BLoC/dashboard/dashboard_bloc.dart';
+import '/BLoC/matchmaking/matchmaking_bloc.dart';
+import '/repository/dashboard_repository.dart';
 
 import 'BLoC/splash/splash_bloc.dart';
 import 'BLoC/login/login_bloc.dart';
@@ -32,8 +33,11 @@ class _JobaileAppState extends State<Jobaile> {
         create: (context) => NavigationCubit(),
       ),
       BlocProvider<DashboardBloc>(
-      create: (context) => DashboardBloc(DashboardRepository()),
-    ),
+        create: (context) => DashboardBloc(DashboardRepository()),
+      ),
+      BlocProvider<WorkerBloc>(
+        create: (context) => WorkerBloc(),
+      ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

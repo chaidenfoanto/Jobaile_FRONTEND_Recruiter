@@ -11,6 +11,14 @@ class MatchmakingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Trigger the LoadInitialWorkerEvent when the screen is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Only trigger the event if the state is WorkerInitial to avoid repeatedly loading
+      if (context.read<WorkerBloc>().state is WorkerInitial) {
+        context.read<WorkerBloc>().add(LoadInitialWorkerEvent());
+      }
+    });
+    
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(120),
@@ -39,7 +47,7 @@ class MatchmakingScreen extends StatelessWidget {
                   child: IconButton(
                     onPressed: () => Navigator.pop(context),
                     icon: SvgPicture.asset(
-                      'assets/foto/arrow_only.svg',
+                      'assets/images/arrow_only.svg',
                       width: 28,
                       height: 28,
                       fit: BoxFit.contain,

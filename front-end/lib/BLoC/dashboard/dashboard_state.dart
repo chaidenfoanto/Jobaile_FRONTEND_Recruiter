@@ -1,4 +1,4 @@
-import '../../models/worker_model.dart';
+import '../../models/worker.dart';
 
 abstract class DashboardState {}
 

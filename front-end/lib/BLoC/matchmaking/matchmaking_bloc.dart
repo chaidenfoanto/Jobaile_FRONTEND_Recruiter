@@ -9,12 +9,29 @@ part 'matchmaking_state.dart';
 
 class WorkerBloc extends Bloc<WorkerEvent, WorkerState> {
   WorkerBloc() : super(WorkerInitial()) {
+    on<LoadInitialWorkerEvent>(_onLoadInitialWorker);
     on<LoadNextWorkerEvent>(_onLoadNextWorker);
     on<ViewWorkerDetailEvent>(_onViewWorkerDetail);
   }
 
   // Simpan index worker yang saat ini ditampilkan
   int _currentWorkerIndex = -1;
+
+  Future<void> _onLoadInitialWorker(
+      LoadInitialWorkerEvent event, Emitter<WorkerState> emit) async {
+    emit(WorkerLoading());
+    try {
+      // Simulate network delay
+      await Future.delayed(const Duration(milliseconds: 500));
+      
+      // Set to the first worker for initial load
+      _currentWorkerIndex = 0;
+      final Worker initialWorker = Worker.dummyWorkers[_currentWorkerIndex];
+      emit(WorkerLoaded(initialWorker));
+    } catch (e) {
+      emit(WorkerError('Failed to load initial worker: ${e.toString()}'));
+    }
+  }
 
   Future<void> _onLoadNextWorker(
       LoadNextWorkerEvent event, Emitter<WorkerState> emit) async {

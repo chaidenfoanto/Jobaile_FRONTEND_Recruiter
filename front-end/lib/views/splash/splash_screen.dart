@@ -2,9 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login/BLoC/splash/splash_bloc.dart';
-import 'package:login/BLoC/splash/splash_event.dart';
-import 'package:login/BLoC/splash/splash_state.dart';
+import '/BLoC/splash/splash_bloc.dart';
+import '/BLoC/splash/splash_event.dart';
+import '/BLoC/splash/splash_state.dart';
 // import 'onboarding_screen.dart';
 
 

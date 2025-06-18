@@ -1,7 +1,7 @@
 // lib/widgets/dashboard/helper_card.dart
 
 import 'package:flutter/material.dart';
-import '../models/worker_model.dart';
+import '../models/worker.dart';
 import '../../color/color.dart';
 
 class WorkerCard extends StatelessWidget {
@@ -25,7 +25,7 @@ class WorkerCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
-                    worker.image,
+                    worker.imagePath,
                     fit: BoxFit.cover,
                   ),
                 ),

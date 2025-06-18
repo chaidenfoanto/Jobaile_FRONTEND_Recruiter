@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:login/BLoC/dashboard/dashboard_bloc.dart';
-import 'package:login/BLoC/dashboard/dashboard_event.dart';
-import 'package:login/repository/dashboard_repository.dart';
+import '/BLoC/dashboard/dashboard_bloc.dart';
+import '/BLoC/dashboard/dashboard_event.dart';
+import '/repository/dashboard_repository.dart';
 
 import '/views/chat.dart';
 import '/views/matchmaking.dart';
@@ -83,7 +83,7 @@ final GoRouter appRouter = GoRouter(
         ),
         GoRoute(
           path: '/main/matchmaking',
-          builder: (context, state) => MatchmakingScreen(),
+          builder: (context, state) => const MatchmakingScreen(),
         ),
         GoRoute(
           path: '/main/chat',
