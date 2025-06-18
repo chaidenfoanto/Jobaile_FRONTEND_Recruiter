@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 import '../BLoC/matchmaking/matchmaking_bloc.dart';
+import '../BLoC/navigation/navigation_cubit.dart';
 import '/models/worker.dart';
 import '/views/detailpage.dart'; // pastikan path ini sesuai struktur folder kamu
 
@@ -45,7 +47,11 @@ class MatchmakingScreen extends StatelessWidget {
                     ],
                   ),
                   child: IconButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      final navCubit = context.read<NavigationCubit>();
+                      navCubit.updateIndex(navCubit.previousItem);
+                      context.pop();
+                    }, 
                     icon: SvgPicture.asset(
                       'assets/images/arrow_only.svg',
                       width: 28,

@@ -24,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   PhoneNumber number = PhoneNumber(isoCode: 'ID');
   String? selectedGender;
   DateTime? _selectedDate;
-  String? _idPhotoPath = 'path/to/photo.jpg'; // Simulasi foto KTP
+  final String? _idPhotoPath = 'path/to/photo.jpg'; // Simulasi foto KTP
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       phoneNumber: number.phoneNumber ?? '',
                                       gender: selectedGender!,
                                       birthDate: _selectedDate!.toIso8601String().split('T')[0],
-                                      idPhotoPath: _idPhotoPath!,
+                                      idPhotoPath: _idPhotoPath,
                                     ));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

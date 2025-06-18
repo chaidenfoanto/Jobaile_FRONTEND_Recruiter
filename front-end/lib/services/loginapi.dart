@@ -8,7 +8,7 @@ class AuthRepository {
   Future<bool> authenticate(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl'),
+        Uri.parse(baseUrl),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'email': email,

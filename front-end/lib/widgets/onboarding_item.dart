@@ -10,7 +10,7 @@ class OnboardingItem extends StatelessWidget {
   final VoidCallback? onPrimaryPressed;
   final Widget? extraButton;
 
-  const OnboardingItem({
+  const OnboardingItem({super.key, 
     required this.image,
     required this.title,
     required this.description,

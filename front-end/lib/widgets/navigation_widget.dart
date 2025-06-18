@@ -52,7 +52,7 @@ class NavigationWidget extends StatelessWidget {
                     GoRouter.of(context).go('/main/home');
                     break;
                   case NavigationItem.match:
-                    GoRouter.of(context).go('/main/matchmaking');
+                    GoRouter.of(context).push('/main/matchmaking');
                     break;
                   case NavigationItem.chat:
                     GoRouter.of(context).go('/main/chat');

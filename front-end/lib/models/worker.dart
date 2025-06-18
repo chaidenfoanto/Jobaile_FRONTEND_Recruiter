@@ -46,7 +46,7 @@ class Worker {
       rating: rating,
       description: description,
       shortDescription: description.length > 80 
-          ? description.substring(0, 80) + '...' 
+          ? '${description.substring(0, 80)}...' 
           : description,
       location: 'Indonesia', // Default value
       experienceTitle: 'Asisten Rumah Tangga',
