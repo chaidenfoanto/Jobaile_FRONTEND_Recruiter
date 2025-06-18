@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instant_match/color/color.dart';
+import '/color/color.dart';
 // Import ChatPage dan BLoC-nya
 import 'chat.dart'; // Pastikan path ini benar ke ChatPage
 import '/BLoC/chat/chat_bloc.dart'; // Pastikan path ini benar ke ChatBloc

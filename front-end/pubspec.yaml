@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-name: instant_match
-=======
-name: profile
->>>>>>> profile
+name: Jobaile_Frontend
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -51,12 +47,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   equatable: ^2.0.5
   http: ^1.4.0
-<<<<<<< HEAD
   intl: ^0.19.0
   meta: ^1.11.0 
-=======
-  google_fonts: ^6.1.0
->>>>>>> profile
 
 dev_dependencies:
   flutter_test:
@@ -83,15 +75,10 @@ flutter:
   uses-material-design: true
 
   assets:
-<<<<<<< HEAD
     - assets/images/
     - assets/images/helper_dashboard/
     - assets/animations/
     - assets/icons/
-=======
-    - assets/foto/Julia.png
-
->>>>>>> profile
 
   # To add assets to your application, add an assets section, like this:
   # assets:

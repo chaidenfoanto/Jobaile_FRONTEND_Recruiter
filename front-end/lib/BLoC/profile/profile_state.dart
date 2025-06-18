@@ -1,4 +1,4 @@
-import 'package:profile/models/user.dart';
+import '/models/user.dart';
 
 abstract class ProfileState {}
 

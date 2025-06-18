@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:instant_match/color/color.dart';
+import '/color/color.dart';
 
 import '../../BLoC/chat/chat_bloc.dart';
 
