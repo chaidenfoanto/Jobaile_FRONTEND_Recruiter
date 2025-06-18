@@ -6,16 +6,14 @@ import 'package:go_router/go_router.dart';
 import '../BLoC/matchmaking/matchmaking_bloc.dart';
 import '../BLoC/navigation/navigation_cubit.dart';
 import '/models/worker.dart';
-import '/views/detailpage.dart'; // pastikan path ini sesuai struktur folder kamu
+import '/views/detailpage.dart'; 
 
 class MatchmakingScreen extends StatelessWidget {
   const MatchmakingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Trigger the LoadInitialWorkerEvent when the screen is built
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Only trigger the event if the state is WorkerInitial to avoid repeatedly loading
       if (context.read<WorkerBloc>().state is WorkerInitial) {
         context.read<WorkerBloc>().add(LoadInitialWorkerEvent());
       }
@@ -28,7 +26,7 @@ class MatchmakingScreen extends StatelessWidget {
           color: Colors.white,
           child: Stack(
             children: [
-              // Tombol kembali
+              // Tombol back
               Positioned(
                 top: 48,
                 left: 21,
@@ -144,7 +142,6 @@ class MatchmakingScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Info pekerja
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0),
             child: Column(
@@ -176,12 +173,28 @@ class MatchmakingScreen extends StatelessWidget {
                 // Rating
                 Row(
                   children: [
-                    for (int i = 0; i < 4; i++)
-                      const Icon(Icons.star, color: Colors.amber, size: 20),
-                    const Icon(Icons.star_half, color: Colors.amber, size: 20),
+                    ...List.generate(5, (i) {
+                      double rating = worker.rating;
+                      if (i < rating.floor()) {
+                        return const Icon(Icons.star, color: Colors.amber, size: 20);
+                      } else if (i < rating) {
+                        double partial = rating - i;
+                        return Stack(
+                          children: [
+                            Icon(Icons.star, color: Colors.grey.shade300, size: 20),
+                            ClipRect(
+                              clipper: _PartialClipper(partial),
+                              child: const Icon(Icons.star, color: Colors.amber, size: 20),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Icon(Icons.star, color: Colors.grey.shade300, size: 20);
+                      }
+                    }),
                     const SizedBox(width: 6),
                     Text(
-                      '4.7',
+                      worker.rating.toStringAsFixed(1),
                       style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
                     ),
                   ],
@@ -279,4 +292,17 @@ class MatchmakingScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class _PartialClipper extends CustomClipper<Rect> {
+  final double fraction;
+
+  _PartialClipper(this.fraction);
+
+  @override
+  Rect getClip(Size size) => Rect.fromLTWH(0, 0, size.width * fraction, size.height);
+
+  @override
+  bool shouldReclip(_PartialClipper oldClipper) => oldClipper.fraction != fraction;
 }

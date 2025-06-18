@@ -70,6 +70,10 @@ final GoRouter appRouter = GoRouter(
       path: '/register',
       builder: (context, state) => const RegisterScreen(),
     ),
+    GoRoute(
+      path: '/main/matchmaking',
+      builder: (context, state) => const MatchmakingScreen(),
+    ),
     ShellRoute(
       navigatorKey: GlobalKey<NavigatorState>(),
       builder: (context, state, child) => NavigationWidget(child: child),
@@ -86,17 +90,16 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: 'worker/:id',
               builder: (context, state) {
-                // The worker object is passed as extra data
                 final worker = state.extra as Worker;
                 return WorkerProfilePage(worker: worker);
               },
             ),
           ],
         ),
-        GoRoute(
-          path: '/main/matchmaking',
-          builder: (context, state) => const MatchmakingScreen(),
-        ),
+        // GoRoute( 
+        //   path: '/main/matchmaking',
+        //   builder: (context, state) => const MatchmakingScreen(), //hide navbar ketika di halaman matchmaking
+        // ),
         GoRoute(
           path: '/main/chat',
           builder: (context, state) => ChatScreen(),
