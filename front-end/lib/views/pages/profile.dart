@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:profile/BLoC/profile_bloc.dart';
 import 'package:profile/BLoC/profile_event.dart';
 import 'package:profile/BLoC/profile_state.dart';
+import 'package:profile/color/color.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -13,14 +14,14 @@ class ProfilePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          preferredSize: Size(393, 105), // Set ukuran W: 393, H: 105
+          preferredSize: Size(393, 70), // Set ukuran W: 393, H: 105
           child: AppBar(
-            backgroundColor: Color(0xFF0B4C86),
+            backgroundColor: AppColors.primary,
             elevation: 0,
             flexibleSpace: Container(
               width: 393,
-              height: 105,
-              padding: EdgeInsets.only(top: 50, left: 16, right: 16),
+              height: 70,
+              padding: EdgeInsets.only(top: 15, left: 16, right: 16),
               alignment: Alignment.centerLeft,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,13 +117,15 @@ class ProfilePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 10),
                           Divider(),
                           buildListItem(Icons.bookmark, "Pekerja Favorit"),
                           Divider(),
-                          buildListItem(Icons.assignment, "Terms & Conditions"),
+                          buildListItem(Icons.assignment, "Syarat & Ketentuan"),
                           Divider(),
-                          buildListItem(Icons.contact_phone, "Contact us"),
+                          buildListItem(Icons.contact_phone, "Hubungi Kami"),
+                          Divider(),
+                          buildListItem(Icons.logout, "Keluar"),
                         ],
                       ),
                     )
