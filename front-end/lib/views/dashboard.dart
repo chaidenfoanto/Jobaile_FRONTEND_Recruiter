@@ -9,7 +9,7 @@ class DashboardScreen extends StatelessWidget {
       'age': 28,
       'description':
           'Berpengalaman lebih dari 3 tahun sebagai ART, terbiasa mengurus dan membersihkan rumah secara detail. Ramah dan disiplin dalam bekerja.',
-      'rating': 4
+      'rating': 4.5
     },
     {
       'image': 'assets/images/helper2.png',
@@ -50,15 +50,16 @@ class DashboardScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
               decoration: BoxDecoration(
-                color: AppColors.primary,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 6,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
+              color: AppColors.primary,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 12,
+                  spreadRadius: 1,
+                  offset: const Offset(0, 6), // arah bawah
+                ),
+              ],
+            ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -155,6 +156,7 @@ class DashboardScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = helpers[index];
+
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -176,11 +178,26 @@ class DashboardScreen extends StatelessWidget {
                           const SizedBox(height: 8),
                           Row(
                             children: List.generate(5, (i) {
-                              return Icon(
-                                Icons.star,
-                                color: i < item['rating'] ? Colors.amber : Colors.grey.shade300,
-                                size: 16,
-                              );
+                              double rating = item['rating'].toDouble();
+                              if (i < rating.floor()) {
+                                // Penuh
+                                return const Icon(Icons.star, color: Colors.amber, size: 16);
+                              } else if (i < rating) {
+                                // Parsial
+                                double partial = rating - i;
+                                return Stack(
+                                  children: [
+                                    Icon(Icons.star, color: Colors.grey.shade300, size: 16),
+                                    ClipRect(
+                                      clipper: PartialClipper(partial),
+                                      child: const Icon(Icons.star, color: Colors.amber, size: 16),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                // Kosong
+                                return Icon(Icons.star, color: Colors.grey.shade300, size: 16);
+                              }
                             }),
                           ),
                         ],
@@ -252,4 +269,19 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class PartialClipper extends CustomClipper<Rect> {
+  final double fraction;
+
+  PartialClipper(this.fraction);
+
+  @override
+  Rect getClip(Size size) {
+    return Rect.fromLTWH(0, 0, size.width * fraction, size.height);
+  }
+
+  @override
+  bool shouldReclip(PartialClipper oldClipper) =>
+      oldClipper.fraction != fraction;
 }
