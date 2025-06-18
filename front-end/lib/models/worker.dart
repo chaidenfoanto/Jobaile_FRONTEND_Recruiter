@@ -8,10 +8,10 @@ class Worker {
   final String description;
   final String shortDescription;
 
-  final String location; // ✅ Tambahan
-  final String experienceTitle; // ✅ Tambahan
-  final String experiencePeriod; // ✅ Tambahan
-  final List<String> experienceDetails; // ✅ Tambahan
+  final String location; 
+  final String experienceTitle; 
+  final String experiencePeriod;
+  final List<String> experienceDetails; 
 
   Worker({
     required this.id,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:instant_match/color/color.dart';
 import 'package:instant_match/models/worker.dart';
 
 class WorkerProfilePage extends StatelessWidget {
@@ -18,7 +19,7 @@ class WorkerProfilePage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               height: 60,
-              color: const Color(0xFF0C3C78),
+              color: AppColors.primary,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
