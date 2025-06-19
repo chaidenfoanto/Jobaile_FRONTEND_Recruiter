@@ -2,7 +2,7 @@ import '../models/worker.dart';
 
 class DashboardRepository {
   Future<List<Worker>> fetchHelpers() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    // await Future.delayed(const Duration(milliseconds: 500));
     return [
       Worker(
         id: '1',
