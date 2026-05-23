@@ -65,9 +65,9 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 
-This backend project was built with php followingg technologies:
+This frontend project was built with the following technologies:
 
-* [![Laravel][Flutter.dev]][Flutter-url]
+* [![Flutter][Flutter.dev]][Flutter-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -131,22 +131,22 @@ dependencies:
 
 ## Getting Started
 
-Follow these steps to set up the laravel project locally
+Follow these steps to set up the Flutter frontend project locally.
 
 ### Prerequisites
 
 Make sure you have installed the following software:
 
-- PHP 8.2+
-- Composer
+- Flutter SDK
+- Dart SDK
+- Android Studio / VS Code
 - Git
-- MySQL 
 
 Check your installation:
 
 ```sh
-php --version
-composer --version
+flutter --version
+dart --version
 git --version
 ```
 
@@ -169,59 +169,42 @@ cd your_repository
 3. Install project dependencies
 
 ```sh
-composer install
+flutter pub get
 ```
 
-4. Copy the environment configuration file
+4. Run the Flutter application
 
 ```sh
-cp .env.example .env
-```
-
-**Windows (PowerShell)**
-
-```powershell
-copy .env.example .env
-```
-
-5. Generate the Laravel application key
-
-```sh
-php artisan key:generate
-```
-
-6. Configure your database in the `.env` file
-
-Example:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=your_database
-DB_USERNAME=root
-DB_PASSWORD=
-```
-
-7. Run database migrations
-
-```sh
-php artisan migrate
-```
-
-8. Start the Laravel development server
-
-```sh
-php artisan serve
-```
-
-The backend server will run at:
-
-```txt
-http://127.0.0.1:8000
+flutter run
 ```
 
 ---
+
+### Build APK
+
+To generate a release APK:
+
+```sh
+flutter build apk --release
+```
+
+Generated APK location:
+
+```txt
+build/app/outputs/flutter-apk/app-release.apk
+```
+
+---
+
+### Verify Flutter Installation
+
+```sh
+flutter doctor
+```
+
+If installed correctly, Flutter will display your environment status and connected devices.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
