@@ -1,7 +1,5 @@
 # Jobaile_FRONTEND_Recruiter
 
-# Jobaile_BACKEND
-
 [![Contributors][contributors-shield]](https://github.com/chaidenfoanto/Jobaile_BACKEND/graphs/contributors)
 
 [contributors-shield]: https://img.shields.io/github/contributors/chaidenfoanto/Jobaile_BACKEND.svg?style=for-the-badge]
@@ -69,35 +67,67 @@ Use the `BLANK_README.md` to get started.
 
 This backend project was built with php followingg technologies:
 
-* [![Laravel][Laravel.com]][Laravel-url]
+* [![Laravel][Flutter.dev]][Flutter-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Project Dependencies
 
-This project uses:
+This Flutter project uses the following packages:
 
-- Laravel Composer
-- Laravel Sanctum
-- Swagger
-- Laraavel Reverb
-- Laravel Tinker
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
 
-Example imports used in the project:
+  # iOS style icons
+  cupertino_icons: ^1.0.6
 
-```laravel
-"require": {
-        "php": "^8.2",
-        "darkaonline/l5-swagger": "^9.0",
-        "laravel/framework": "^11.31",
-        "laravel/reverb": "^1.0",
-        "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9",
-        "otnansirk/laravel-dana": "^2.3",
-        "thiagoprz/eloquent-composite-key": "^1.0",
-        "zircote/swagger-php": "^5.1"
-    },
+  # Local database
+  objectbox: ^4.2.0
+  objectbox_flutter_libs: any
+
+  # Persistent storage
+  shared_preferences: ^2.5.3
+
+  # Animations
+  lottie: ^3.3.1
+
+  # Location services
+  geolocator: ^14.0.1
+
+  # Fonts
+  google_fonts: ^6.2.1
+
+  # State management
+  flutter_bloc: ^9.1.1
+
+  # Routing
+  go_router: ^15.1.3
+
+  # Input validation
+  intl_phone_number_input: ^0.7.4
+
+  # SVG rendering
+  flutter_svg: ^2.1.0
+
+  # Rating widget
+  flutter_rating_bar: ^4.0.1
+
+  # Equality checks for Bloc
+  equatable: ^2.0.5
+
+  # HTTP requests
+  http: ^1.4.0
+
+  # Internationalization
+  intl: ^0.19.0
+
+  # Meta annotations
+  meta: ^1.11.0
 ```
+
+---
 
 ## Getting Started
 
@@ -219,5 +249,5 @@ Project Link: [https://github.com/chaidenfoanto/Jobaile_BACKEND)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Laravel.com]: https://img.shields.io/badge/Laravel-%23FF2D20.svg?logo=laravel&logoColor=white
-[Laravel-url]: [https://ultralytics.com/](https://laravel.com)
+[Flutter.dev]: https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=fff
+[Flutter-url]: https://flutter.dev
