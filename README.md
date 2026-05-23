@@ -1,8 +1,8 @@
 # Jobaile_FRONTEND_Recruiter
 
-[![Contributors][contributors-shield]](https://github.com/chaidenfoanto/Jobaile_BACKEND/graphs/contributors)
+[![Contributors][contributors-shield]](https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter/graphs/contributors)
 
-[contributors-shield]: https://img.shields.io/github/contributors/chaidenfoanto/Jobaile_BACKEND.svg?style=for-the-badge]
+[contributors-shield]: https://img.shields.io/github/contributors/chaidenfoanto/Jobaile_FRONTEND_Recruiter.svg?style=for-the-badge]
 
 [![LinkedIn Franklin Jaya][linkedin-shield]](https://www.linkedin.com/in/franklin-jaya-6a3697364/)
 [![LinkedIn Chaiden][linkedin-shield]](https://www.linkedin.com/in/chaidenfoanto/?locale=en)
