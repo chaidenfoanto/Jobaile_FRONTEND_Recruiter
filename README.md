@@ -139,7 +139,7 @@ Make sure you have installed the following software:
 
 - Flutter SDK
 - Dart SDK
-- Android Studio / VS Code
+- VS Code
 - Git
 
 Check your installation:
