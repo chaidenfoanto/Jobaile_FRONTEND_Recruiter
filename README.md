@@ -37,6 +37,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#Development">Development Teams</a></li>
   </ol>
 </details>
 
@@ -227,6 +228,14 @@ Franklin Jaya - [@franklinjaya_](https://www.instagram.com/franklinjaya_/) - fra
 Project Link: (https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Development Team
+
+Proyek ini dikembangkan oleh tim **Jobaile Development Team**, yang terdiri dari:
+
+1. **Chaiden Richardo Foanto**  
+2. **Franklin Jaya** 
+3. **Felicia Wijaya** 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
