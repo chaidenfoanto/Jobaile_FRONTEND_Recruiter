@@ -225,7 +225,7 @@ Repository Links:
 
 Franklin Jaya - [@franklinjaya_](https://www.instagram.com/franklinjaya_/) - franklinjaya827@gmail.com
 
-Project Link: [https://github.com/chaidenfoanto/Jobaile_BACKEND)
+Project Link: (https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
