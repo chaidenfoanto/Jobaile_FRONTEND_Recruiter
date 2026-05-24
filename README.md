@@ -11,8 +11,10 @@
 
 
 <!-- PROJECT LOGO -->
+<p align="center">
+  <img src="jobailelogo.png" width="250">
+</p>
 <br />
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -45,28 +47,55 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<p align="center">
+  <img src="mokupjobaile.png" width="250">
+</p>
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+Jobaile is a mobile and web-based recruitment platform designed to connect recruiters with domestic workers such as housemaids (ART), caregivers, cleaners, and other household service providers.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+The application was developed to help address trust issues that are still common in domestic worker recruitment processes. Many employers experience difficulties in finding reliable workers, while workers also struggle to access secure and trustworthy job opportunities.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people who have contributed to expanding this template!
+Jobaile provides a digital platform that simplifies the recruitment process through user verification, worker profiles, communication features, and job matching systems.
 
-Use the `BLANK_README.md` to get started.
+The system consists of two main roles:
+
+### Recruiter
+Recruiters or employers can:
+
+- Search for domestic workers
+- View worker profiles and information
+- Monitor application status
+- Communicate with workers
+- Find workers that match their requirements
+
+### Worker
+Workers can:
+
+- Create professional profiles
+- Apply for available jobs
+- Showcase skills and experiences
+- Receive job opportunities from recruiters
+- Build credibility through profile information
+
+Main features include:
+
+- Domestic worker recruitment platform
+- Recruiter and worker role management
+- Real-time communication features
+- Profile and identity management
+- Job searching and matching system
+- Mobile-friendly user experience
+- Secure authentication system
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 ### Built With
 
 This frontend project was built with the following technologies:
 
-* [![Flutter][Flutter.dev]][Flutter-url]
+<a href="https://flutter.dev/">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" height="35">
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,7 +243,8 @@ This project consists of two separate repositories:
 - Backend (Laravel API)
 
 Repository Links:
-- Frontend: https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter
+- Frontend Recruiter: https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter
+- Frontend Worker: https://github.com/chaidenfoanto/Jobaile_FRONTEND_Worker
 - Backend: https://github.com/chaidenfoanto/Jobaile_BACKEND
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -222,9 +252,7 @@ Repository Links:
 <!-- CONTACT -->
 ## Contact
 
-Franklin Jaya - [@franklinjaya_](https://www.instagram.com/franklinjaya_/) - franklinjaya827@gmail.com
-
-Project Link: (https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter)
+Franklin Jaya - [@franklinjaya_](https://www.instagram.com/franklinjaya_/) - franklinjaya827@gmail.com - [Franklin_Github](https://github.com/FranklinJaya2006)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
