@@ -1,6 +1,6 @@
 # Jobaile_FRONTEND_Recruiter
 
-[![Contributors][contributors-shield]](https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/chaidenfoanto/Jobaile_FRONTEND_Recruiter?style=for-the-badge)](https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter/graphs/contributors)
 
 [contributors-shield]: https://img.shields.io/github/contributors/chaidenfoanto/Jobaile_FRONTEND_Recruiter.svg?style=for-the-badge]
 
