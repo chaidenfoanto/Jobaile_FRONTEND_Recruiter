@@ -21,6 +21,9 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
+        <a href="#project-links">Project Links</a>
+    </li>
+    <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
@@ -42,7 +45,10 @@
   </ol>
 </details>
 
+## Project Links 
 
+- Frontend Recruiter: https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter
+- Backend: https://github.com/chaidenfoanto/Jobaile_BACKEND
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -241,10 +247,6 @@ This project consists of two separate repositories:
 
 - Frontend (Flutter)
 - Backend (Laravel API)
-
-Repository Links:
-- Frontend Recruiter: https://github.com/chaidenfoanto/Jobaile_FRONTEND_Recruiter
-- Backend: https://github.com/chaidenfoanto/Jobaile_BACKEND
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
